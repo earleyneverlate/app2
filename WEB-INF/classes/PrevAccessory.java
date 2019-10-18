@@ -113,16 +113,16 @@ public class PrevAccessory extends HttpServlet {
 		pw.print("<div id='content'><div class='post'><h2 class='title meta'>");
 		pw.print("<a style='font-size: 24px;'>"+ProductName+" Accessories</a>");
 		pw.print("</h2><div class='entry'><table id='bestseller'>");
-		Console console1 = hm.get(ProductName);
+//		Console console1 = hm.get(ProductName);
 		
 		int i = 1; int size= hm.size();
 		pw.print("<tr>");
 		ArrayList<String> arr = new ArrayList<String> ();
-		for(Map.Entry<String, String> acc:tv1.getAccessories().entrySet())
-		{
-			
-			arr.add(acc.getValue());
-		}	
+//		for(Map.Entry<String, String> acc:tv1.getAccessories().entrySet())
+//		{
+//
+//			arr.add(acc.getValue());
+//		}
 		
 	
 		if (j > 0){
