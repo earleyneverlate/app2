@@ -86,13 +86,13 @@ public static void Insertproducts()
             
             pst.executeUpdate();
             try{
-            HashMap<String,String> acc = tvs.getAccessories();
+            HashMap<String,String> acc = tv.getAccessories();
             String insertAccessoryQurey = "INSERT INTO  Product_accessories(productName,accessoriesName)" +
             "VALUES (?,?);";
             for(Map.Entry<String,String> accentry : acc.entrySet())
             {
                 PreparedStatement pstacc = conn.prepareStatement(insertAccessoryQurey);
-                pstacc.setString(1,con.getId());
+                pstacc.setString(1,tv.getId());
                 pstacc.setString(2,accentry.getValue());
                 pstacc.executeUpdate();
             }
@@ -103,7 +103,7 @@ public static void Insertproducts()
         for(Map.Entry<String,SoundSystem> entry : SaxParser4BestDealXMLdataStore1.sounds.entrySet())
         {   
             String name = "sounds";
-            Sound sound = entry.getValue();
+            SoundSystem sound = entry.getValue();
             
             PreparedStatement pst = conn.prepareStatement(insertProductQurey);
             pst.setString(1,name);
@@ -160,7 +160,7 @@ public static void Insertproducts()
         for(Map.Entry<String,VoiceAssistant> entry : SaxParser4BestDealXMLdataStore1.voices.entrySet())
         {   
             String name = "voices";
-            Voice voice = entry.getValue();
+            VoiceAssistant voice = entry.getValue();
             
             PreparedStatement pst = conn.prepareStatement(insertProductQurey);
             pst.setString(1,name);
@@ -179,7 +179,7 @@ public static void Insertproducts()
         for(Map.Entry<String,FitnessWatch> entry : SaxParser4BestDealXMLdataStore1.fitnesses.entrySet())
         {   
             String name = "fitnesses";
-            Fitness fitness = entry.getValue();
+            FitnessWatch fitness = entry.getValue();
             
             PreparedStatement pst = conn.prepareStatement(insertProductQurey);
             pst.setString(1,name);
@@ -198,7 +198,7 @@ public static void Insertproducts()
         for(Map.Entry<String,SmartWatch> entry : SaxParser4BestDealXMLdataStore1.smarts.entrySet())
         {   
             String name = "smarts";
-            Smart smart = entry.getValue();
+            SmartWatch smart = entry.getValue();
             
             PreparedStatement pst = conn.prepareStatement(insertProductQurey);
             pst.setString(1,name);
@@ -217,7 +217,7 @@ public static void Insertproducts()
         for(Map.Entry<String,Headphones> entry : SaxParser4BestDealXMLdataStore1.headphones.entrySet())
         {   
             String name = "headphones";
-            Headphone headphone = entry.getValue();
+            Headphones headphone = entry.getValue();
             
             PreparedStatement pst = conn.prepareStatement(insertProductQurey);
             pst.setString(1,name);
@@ -236,7 +236,7 @@ public static void Insertproducts()
          for(Map.Entry<String,WirelessPlan> entry : SaxParser4BestDealXMLdataStore1.wirelesses.entrySet())
         {   
             String name = "wirelesses";
-            Wireless wireless = entry.getValue();
+            WirelessPlan wireless = entry.getValue();
             
             PreparedStatement pst = conn.prepareStatement(insertProductQurey);
             pst.setString(1,name);
@@ -289,7 +289,7 @@ public static HashMap<String,Tv> getTvs()
                     if (rsacc.getString("accessoriesName") != null){
                     
                      acchashmap.put(rsacc.getString("accessoriesName"),rsacc.getString("accessoriesName"));
-                     con.setAccessories(acchashmap);
+                     tv.setAccessories(acchashmap);
                     }
                      
                 }                   
@@ -318,7 +318,7 @@ public static HashMap<String,SoundSystem> getSounds()
         ResultSet rs = pst.executeQuery();
     
         while(rs.next())
-        {   Sound sound = new Sound(rs.getString("productName"),rs.getDouble("productPrice"),rs.getString("productImage"),rs.getString("productManufacturer"),rs.getString("productCondition"),rs.getDouble("productDiscount"));
+        {   SoundSystem sound = new SoundSystem(rs.getString("productName"),rs.getDouble("productPrice"),rs.getString("productImage"),rs.getString("productManufacturer"),rs.getString("productCondition"),rs.getDouble("productDiscount"));
                 hm.put(rs.getString("Id"), sound);
                 sound.setId(rs.getString("Id"));
 
@@ -363,7 +363,7 @@ public static HashMap<String,Laptop> getLaptops()
         getConnection();
         
         String selectLaptop = "select * from  Productdetails where ProductType=?";
-        PreparedStatement pst = conn.prepareStatement(selectGame);
+        PreparedStatement pst = conn.prepareStatement(selectLaptop);
         pst.setString(1,"laptops");
         ResultSet rs = pst.executeQuery();
     
@@ -392,7 +392,7 @@ public static HashMap<String,VoiceAssistant> getVoices()
         ResultSet rs = pst.executeQuery();
     
         while(rs.next())
-        {   Voice voice = new Voice(rs.getString("productName"),rs.getDouble("productPrice"),rs.getString("productImage"),rs.getString("productManufacturer"),rs.getString("productCondition"),rs.getDouble("productDiscount"));
+        {   VoiceAssistant voice = new VoiceAssistant(rs.getString("productName"),rs.getDouble("productPrice"),rs.getString("productImage"),rs.getString("productManufacturer"),rs.getString("productCondition"),rs.getDouble("productDiscount"));
                 hm.put(rs.getString("Id"), voice);
                 voice.setId(rs.getString("Id"));
         }
@@ -416,7 +416,7 @@ public static HashMap<String,FitnessWatch> getFitnesses()
         ResultSet rs = pst.executeQuery();
     
         while(rs.next())
-        {   Fitness fitness = new Fitness(rs.getString("productName"),rs.getDouble("productPrice"),rs.getString("productImage"),rs.getString("productManufacturer"),rs.getString("productCondition"),rs.getDouble("productDiscount"));
+        {   FitnessWatch fitness = new FitnessWatch(rs.getString("productName"),rs.getDouble("productPrice"),rs.getString("productImage"),rs.getString("productManufacturer"),rs.getString("productCondition"),rs.getDouble("productDiscount"));
                 hm.put(rs.getString("Id"), fitness);
                 fitness.setId(rs.getString("Id"));
         }
@@ -439,7 +439,7 @@ public static HashMap<String,SmartWatch> getSmarts()
         ResultSet rs = pst.executeQuery();
     
         while(rs.next())
-        {   Smart smart = new Smart(rs.getString("productName"),rs.getDouble("productPrice"),rs.getString("productImage"),rs.getString("productManufacturer"),rs.getString("productCondition"),rs.getDouble("productDiscount"));
+        {   SmartWatch smart = new SmartWatch(rs.getString("productName"),rs.getDouble("productPrice"),rs.getString("productImage"),rs.getString("productManufacturer"),rs.getString("productCondition"),rs.getDouble("productDiscount"));
                 hm.put(rs.getString("Id"), smart);
                 smart.setId(rs.getString("Id"));
         }
@@ -462,7 +462,7 @@ public static HashMap<String,Headphones> getHeadphones()
         ResultSet rs = pst.executeQuery();
     
         while(rs.next())
-        {   Headphone headphone = new Smart(rs.getString("productName"),rs.getDouble("productPrice"),rs.getString("productImage"),rs.getString("productManufacturer"),rs.getString("productCondition"),rs.getDouble("productDiscount"));
+        {   Headphones headphone = new Headphones(rs.getString("productName"),rs.getDouble("productPrice"),rs.getString("productImage"),rs.getString("productManufacturer"),rs.getString("productCondition"),rs.getDouble("productDiscount"));
                 hm.put(rs.getString("Id"), headphone);
                 headphone.setId(rs.getString("Id"));
         }
@@ -485,7 +485,7 @@ public static HashMap<String,WirelessPlan> getWireless()
         ResultSet rs = pst.executeQuery();
     
         while(rs.next())
-        {   Wireless wireless = new Wireless(rs.getString("productName"),rs.getDouble("productPrice"),rs.getString("productImage"),rs.getString("productManufacturer"),rs.getString("productCondition"),rs.getDouble("productDiscount"));
+        {   WirelessPlan wireless = new WirelessPlan(rs.getString("productName"),rs.getDouble("productPrice"),rs.getString("productImage"),rs.getString("productManufacturer"),rs.getString("productCondition"),rs.getDouble("productDiscount"));
                 hm.put(rs.getString("Id"), wireless);
                 wireless.setId(rs.getString("Id"));
         }
