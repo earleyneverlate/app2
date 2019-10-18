@@ -17,17 +17,26 @@ public class SoundSystemList extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		String name = null;
 		String CategoryName = request.getParameter("maker");
+		HashMap<String,SoundSystem> allsounds = new HashMap<String, SoundSystem>();
+
+		try{
+		     allsounds = MySqlDataStoreUtilities.getSounds();
+		}
+		catch(Exception e)
+		{
+			
+		}
 
 		HashMap<String, SoundSystem> hm = new HashMap<String, SoundSystem>();
 		if(CategoryName==null){
-			hm.putAll(SaxParser4BestDealXMLdataStore1.sounds);
+			hm.putAll(allsounds);
 			name = "";
 		}
 		else
 		{
 		   if(CategoryName.equals("behringer"))
 		   {
-			 for(Map.Entry<String,SoundSystem> entry : SaxParser4BestDealXMLdataStore1.sounds.entrySet())
+			 for(Map.Entry<String,SoundSystem> entry : allsounds.entrySet())
 			 {
 				if(entry.getValue().getRetailer().equals("Behringer"))
 				 {
@@ -38,7 +47,7 @@ public class SoundSystemList extends HttpServlet {
 		   }
 		   else if(CategoryName.equals("rockville"))
 		    {
-			for(Map.Entry<String,SoundSystem> entry : SaxParser4BestDealXMLdataStore1.sounds.entrySet())
+			for(Map.Entry<String,SoundSystem> entry : allsounds.entrySet())
 				{
 				 if(entry.getValue().getRetailer().equals("Rockville"))
 				 {
@@ -49,7 +58,7 @@ public class SoundSystemList extends HttpServlet {
 			}
 			else if(CategoryName.equals("powerwerks"))
 			{
-				for(Map.Entry<String,SoundSystem> entry : SaxParser4BestDealXMLdataStore1.sounds.entrySet())
+				for(Map.Entry<String,SoundSystem> entry : allsounds.entrySet())
 				{
 				 if(entry.getValue().getRetailer().equals("Powerwerks"))
 				 {
@@ -60,7 +69,7 @@ public class SoundSystemList extends HttpServlet {
 			}
 			else if(CategoryName.equals("dell"))
 			{
-				for(Map.Entry<String,SoundSystem> entry : SaxParser4BestDealXMLdataStore1.sounds.entrySet())
+				for(Map.Entry<String,SoundSystem> entry : allsounds.entrySet())
 				{
 				 if(entry.getValue().getRetailer().equals("Dell"))
 				 {
@@ -71,7 +80,7 @@ public class SoundSystemList extends HttpServlet {
 			}
 			else if(CategoryName.equals("mackie"))
 			{
-				for(Map.Entry<String,SoundSystem> entry : SaxParser4BestDealXMLdataStore1.sounds.entrySet())
+				for(Map.Entry<String,SoundSystem> entry : allsounds.entrySet())
 				{
 				 if(entry.getValue().getRetailer().equals("Mackie"))
 				 {

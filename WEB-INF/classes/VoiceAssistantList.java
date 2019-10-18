@@ -17,17 +17,26 @@ public class VoiceAssistantList extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		String name = null;
 		String CategoryName = request.getParameter("maker");
+		HashMap<String,VoiceAssistant> allvoices = new HashMap<String,VoiceAssistant>();
+
+		try{
+		     allvoices = MySqlDataStoreUtilities.getVoices();
+		}
+		catch(Exception e)
+		{
+			
+		}
 
 		HashMap<String, VoiceAssistant> hm = new HashMap<String, VoiceAssistant>();
 		if(CategoryName==null){
-			hm.putAll(SaxParser4BestDealXMLdataStore1.voices);
+			hm.putAll(allvoices);
 			name = "";
 		}
 		else
 		{
 		   if(CategoryName.equals("google"))
 		   {
-			 for(Map.Entry<String,VoiceAssistant> entry : SaxParser4BestDealXMLdataStore1.voices.entrySet())
+			 for(Map.Entry<String,VoiceAssistant> entry : allvoices.entrySet())
 			 {
 				if(entry.getValue().getRetailer().equals("Google"))
 				 {
@@ -38,7 +47,7 @@ public class VoiceAssistantList extends HttpServlet {
 		   }
 		   else if(CategoryName.equals("amazon"))
 		    {
-			for(Map.Entry<String,VoiceAssistant> entry : SaxParser4BestDealXMLdataStore1.voices.entrySet())
+			for(Map.Entry<String,VoiceAssistant> entry : allvoices.entrySet())
 				{
 				 if(entry.getValue().getRetailer().equals("Amazon"))
 				 {
@@ -49,7 +58,7 @@ public class VoiceAssistantList extends HttpServlet {
 			}
 			 else if(CategoryName.equals("sonos"))
 		    {
-			for(Map.Entry<String,VoiceAssistant> entry : SaxParser4BestDealXMLdataStore1.voices.entrySet())
+			for(Map.Entry<String,VoiceAssistant> entry : allvoices.entrySet())
 				{
 				 if(entry.getValue().getRetailer().equals("Sonos"))
 				 {

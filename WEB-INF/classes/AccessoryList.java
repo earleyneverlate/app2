@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public class AccessoryList extends HttpServlet {
 
-	/* Tv Page Displays all the tvs and their Information in Best Deal */
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter pw = response.getWriter();
@@ -21,13 +19,28 @@ public class AccessoryList extends HttpServlet {
 		//String CategoryName = request.getParameter("maker");
         
 		String CategoryName = request.getParameter("maker");
+		HashMap<String,Accessory> allaccessories = new HashMap<String,Accessory> ();
+        HashMap<String,Tv> alltvs = new HashMap<String,Tv> ();
 
-		/* Checks the Tv types*/
+		try{
+		     alltvs = MySqlDataStoreUtilities.getTvs();
+		}
+		catch(Exception e)
+		{
+			
+		}
+		try{
+		     allaccessories = MySqlDataStoreUtilities.getAccessories();
+		}
+		catch(Exception e)
+		{
+
+		}	
 
 		HashMap<String, Tv> hm = new HashMap<String, Tv>();	
 		   if(CategoryName.equalsIgnoreCase("samsung"))
 		   {
-			 for(Map.Entry<String,Tv> entry : SaxParser4BestDealXMLdataStore1.tvs.entrySet())
+			 for(Map.Entry<String,Tv> entry : alltvs.entrySet())
 			 {
 				 if(entry.getValue().getRetailer().equalsIgnoreCase("Samsung"))
 				 {
@@ -37,7 +50,7 @@ public class AccessoryList extends HttpServlet {
 		   }
 		   else if(CategoryName.equalsIgnoreCase("lcl"))
 		   {
-			   for(Map.Entry<String,Tv> entry : SaxParser4BestDealXMLdataStore1.tvs.entrySet())
+			   for(Map.Entry<String,Tv> entry : alltvs.entrySet())
 			   {
 				   if(entry.getValue().getRetailer().equalsIgnoreCase("LCL"))
 				   {
@@ -47,7 +60,7 @@ public class AccessoryList extends HttpServlet {
 			}
 			else if(CategoryName.equalsIgnoreCase("lg"))
 		    {
-				for(Map.Entry<String,Tv> entry : SaxParser4BestDealXMLdataStore1.tvs.entrySet())
+				for(Map.Entry<String,Tv> entry : alltvs.entrySet())
 				{
 					if(entry.getValue().getRetailer().equalsIgnoreCase("LG"))
 					{
@@ -57,7 +70,7 @@ public class AccessoryList extends HttpServlet {
 			}
 			else if(CategoryName.equalsIgnoreCase("sony"))
 		    {
-				for(Map.Entry<String,Tv> entry : SaxParser4BestDealXMLdataStore1.tvs.entrySet())
+				for(Map.Entry<String,Tv> entry : alltvs.entrySet())
 				{
 					if(entry.getValue().getRetailer().equalsIgnoreCase("Sony"))
 					{
@@ -86,7 +99,7 @@ public class AccessoryList extends HttpServlet {
 			for(Map.Entry<String, String> acc:tv.getAccessories().entrySet())
 			{
 	        
-				Accessory accessory = SaxParser4BestDealXMLdataStore1.accessories.get(acc.getValue());
+				Accessory accessory = allaccessories.get(acc.getValue());
 				if(i%2==1) pw.print("<tr>");
 				System.out.print(size);
 				pw.print("<td><div id='shop_item'>");

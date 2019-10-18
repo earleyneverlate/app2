@@ -17,17 +17,26 @@ public class PhoneList extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		String name = null;
 		String CategoryName = request.getParameter("maker");
+		HashMap<String, Phone> allphones = new HashMap<String, Phone>();
+
+		try{
+		     allphones = MySqlDataStoreUtilities.getPhones();
+		}
+		catch(Exception e)
+		{
+			
+		}
 
 		HashMap<String, Phone> hm = new HashMap<String, Phone>();
 		if(CategoryName==null){
-			hm.putAll(SaxParser4BestDealXMLdataStore1.phones);
+			hm.putAll(allphones);
 			name = "";
 		}
 		else
 		{
 		   if(CategoryName.equals("apple"))
 		   {
-			 for(Map.Entry<String,Phone> entry : SaxParser4BestDealXMLdataStore1.phones.entrySet())
+			 for(Map.Entry<String,Phone> entry : allphones.entrySet())
 			 {
 				if(entry.getValue().getRetailer().equals("Apple"))
 				 {
@@ -38,7 +47,7 @@ public class PhoneList extends HttpServlet {
 		   }
 		   else if(CategoryName.equals("samsung"))
 		    {
-			for(Map.Entry<String,Phone> entry : SaxParser4BestDealXMLdataStore1.phones.entrySet())
+			for(Map.Entry<String,Phone> entry : allphones.entrySet())
 				{
 				 if(entry.getValue().getRetailer().equals("Samsung"))
 				 {

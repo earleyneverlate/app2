@@ -17,20 +17,26 @@ public class SmartWatchList extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		String name = null;
 		String CategoryName = request.getParameter("maker");
-        
+		HashMap<String, SmartWatch> allsmarts = new HashMap<String, SmartWatch>();
 
-		/* Checks the Tv types*/
+		try{
+		     allsmarts = MySqlDataStoreUtilities.getSmarts();
+		}
+		catch(Exception e)
+		{
+			
+		}
 
 		HashMap<String, SmartWatch> hm = new HashMap<String, SmartWatch>();
 		if(CategoryName==null){
-			hm.putAll(SaxParser4BestDealXMLdataStore1.smarts);
+			hm.putAll(allsmarts);
 			name = "";
 		}
 		else
 		{
 		   if(CategoryName.equals("apple"))
 		   {
-			 for(Map.Entry<String,SmartWatch> entry : SaxParser4BestDealXMLdataStore1.smarts.entrySet())
+			 for(Map.Entry<String,SmartWatch> entry : allsmarts.entrySet())
 			 {
 				if(entry.getValue().getRetailer().equals("Apple"))
 				 {
@@ -41,7 +47,7 @@ public class SmartWatchList extends HttpServlet {
 		   }
 		   else if(CategoryName.equals("fossil"))
 		    {
-			for(Map.Entry<String,SmartWatch> entry : SaxParser4BestDealXMLdataStore1.smarts.entrySet())
+			for(Map.Entry<String,SmartWatch> entry : allsmarts.entrySet())
 				{
 				 if(entry.getValue().getRetailer().equals("Fossil"))
 				 {
@@ -52,7 +58,7 @@ public class SmartWatchList extends HttpServlet {
 			}
 			 else if(CategoryName.equals("movado"))
 		    {
-			for(Map.Entry<String,SmartWatch> entry : SaxParser4BestDealXMLdataStore1.smarts.entrySet())
+			for(Map.Entry<String,SmartWatch> entry : allsmarts.entrySet())
 				{
 				 if(entry.getValue().getRetailer().equals("Movado"))
 				 {

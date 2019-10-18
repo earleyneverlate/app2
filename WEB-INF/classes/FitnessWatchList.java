@@ -17,20 +17,26 @@ public class FitnessWatchList extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		String name = null;
 		String CategoryName = request.getParameter("maker");
-        
+        HashMap<String,FitnessWatch> allfitnesses = new HashMap<String, FitnessWatch>();
 
-		/* Checks the Tv types*/
+        try{
+        	allfitnesses = MySqlDataStoreUtilities.getFitnesses();
+        }
+        catch(Exception e){
+
+        }
+		
 
 		HashMap<String, FitnessWatch> hm = new HashMap<String, FitnessWatch>();
 		if(CategoryName==null){
-			hm.putAll(SaxParser4BestDealXMLdataStore1.fitnesses);
+			hm.putAll(allfitnesses);
 			name = "";
 		}
 		else
 		{
 		   if(CategoryName.equals("apple"))
 		   {
-			 for(Map.Entry<String,FitnessWatch> entry : SaxParser4BestDealXMLdataStore1.fitnesses.entrySet())
+			 for(Map.Entry<String,FitnessWatch> entry : allfitnesses.entrySet())
 			 {
 				if(entry.getValue().getRetailer().equals("Apple"))
 				 {
@@ -41,7 +47,7 @@ public class FitnessWatchList extends HttpServlet {
 		   }
 		   else if(CategoryName.equals("samsung"))
 		    {
-			for(Map.Entry<String,FitnessWatch> entry : SaxParser4BestDealXMLdataStore1.fitnesses.entrySet())
+			for(Map.Entry<String,FitnessWatch> entry : allfitnesses.entrySet())
 				{
 				 if(entry.getValue().getRetailer().equals("Samsung"))
 				 {
@@ -52,7 +58,7 @@ public class FitnessWatchList extends HttpServlet {
 			}
 			 else if(CategoryName.equals("fitbit"))
 		    {
-			for(Map.Entry<String,FitnessWatch> entry : SaxParser4BestDealXMLdataStore1.fitnesses.entrySet())
+			for(Map.Entry<String,FitnessWatch> entry : allfitnesses.entrySet())
 				{
 				 if(entry.getValue().getRetailer().equals("Fitbit"))
 				 {

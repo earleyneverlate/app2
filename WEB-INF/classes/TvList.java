@@ -17,20 +17,26 @@ public class TvList extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		String name = null;
 		String CategoryName = request.getParameter("maker");
-        
+        HashMap<String, Tv> alltvs = new HashMap<String,Tv>();
 
-		/* Checks the Tv types*/
+		try{
+		     alltvs = MySqlDataStoreUtilities.getTvs();
+		}
+		catch(Exception e)
+		{
+			
+		}
 
 		HashMap<String, Tv> hm = new HashMap<String, Tv>();
 		if(CategoryName==null){
-			hm.putAll(SaxParser4BestDealXMLdataStore1.tvs);
+			hm.putAll(alltvs);
 			name = "";
 		}
 		else
 		{
 		   if(CategoryName.equalsIgnoreCase("samsung"))
 		   {
-			 for(Map.Entry<String,Tv> entry : SaxParser4BestDealXMLdataStore1.tvs.entrySet())
+			 for(Map.Entry<String,Tv> entry : alltvs.entrySet())
 			 {
 				if(entry.getValue().getRetailer().equalsIgnoreCase("Samsung"))
 				 {
@@ -41,7 +47,7 @@ public class TvList extends HttpServlet {
 		   }
 		   else if(CategoryName.equalsIgnoreCase("lcl"))
 		    {
-			for(Map.Entry<String,Tv> entry : SaxParser4BestDealXMLdataStore1.tvs.entrySet())
+			for(Map.Entry<String,Tv> entry : alltvs.entrySet())
 				{
 				 if(entry.getValue().getRetailer().equalsIgnoreCase("LCL"))
 				 {
@@ -52,7 +58,7 @@ public class TvList extends HttpServlet {
 			}
 			else if(CategoryName.equalsIgnoreCase("sony"))
 			{
-				for(Map.Entry<String,Tv> entry : SaxParser4BestDealXMLdataStore1.tvs.entrySet())
+				for(Map.Entry<String,Tv> entry : alltvs.entrySet())
 				{
 				 if(entry.getValue().getRetailer().equalsIgnoreCase("Sony"))
 				 {
@@ -63,7 +69,7 @@ public class TvList extends HttpServlet {
 			}
 			else if(CategoryName.equalsIgnoreCase("lg"))
 			{
-				for(Map.Entry<String,Tv> entry : SaxParser4BestDealXMLdataStore1.tvs.entrySet())
+				for(Map.Entry<String,Tv> entry : alltvs.entrySet())
 				{
 				 if(entry.getValue().getRetailer().equalsIgnoreCase("LG"))
 				 {

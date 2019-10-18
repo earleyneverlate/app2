@@ -17,17 +17,26 @@ public class LaptopList extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		String name = null;
 		String CategoryName = request.getParameter("maker");
+		HashMap<String, Laptop> alllaptops = new HashMap<String, Laptop>();
+
+		try{
+		     alllaptops = MySqlDataStoreUtilities.getLaptops();
+		}
+		catch(Exception e)
+		{
+			
+		}
 
 		HashMap<String, Laptop> hm = new HashMap<String, Laptop>();
 		if(CategoryName == null){
-			hm.putAll(SaxParser4BestDealXMLdataStore1.laptops);
+			hm.putAll(alllaptops);
 			name = "";
 		}
 		else
 		{
 		   if(CategoryName.equals("apple"))
 		   {
-			 for(Map.Entry<String,Laptop> entry : SaxParser4BestDealXMLdataStore1.laptops.entrySet())
+			 for(Map.Entry<String,Laptop> entry : alllaptops.entrySet())
 			 {
 				if(entry.getValue().getRetailer().equals("Apple"))
 				 {
@@ -38,7 +47,7 @@ public class LaptopList extends HttpServlet {
 		   }
 		   else if(CategoryName.equals("google"))
 		    {
-			for(Map.Entry<String,Laptop> entry : SaxParser4BestDealXMLdataStore1.laptops.entrySet())
+			for(Map.Entry<String,Laptop> entry : alllaptops.entrySet())
 				{
 				 if(entry.getValue().getRetailer().equals("Google"))
 				 {
@@ -49,7 +58,7 @@ public class LaptopList extends HttpServlet {
 			}
 			 else if(CategoryName.equals("lenovo"))
 		    {
-			for(Map.Entry<String,Laptop> entry : SaxParser4BestDealXMLdataStore1.laptops.entrySet())
+			for(Map.Entry<String,Laptop> entry : alllaptops.entrySet())
 				{
 				 if(entry.getValue().getRetailer().equals("Lenovo"))
 				 {

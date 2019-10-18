@@ -17,17 +17,26 @@ public class WirelessPlanList extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		String name = null;
 		String CategoryName = request.getParameter("maker");
+		HashMap<String, WirelessPlan> allwireless = new HashMap<String, WirelessPlan>();
         
+        try{
+		     allwireless = MySqlDataStoreUtilities.getWireless();
+		}
+		catch(Exception e)
+		{
+			
+		}
+
 		HashMap<String, WirelessPlan> hm = new HashMap<String, WirelessPlan>();
 		if(CategoryName==null){
-			hm.putAll(SaxParser4BestDealXMLdataStore1.wirelesses);
+			hm.putAll(allwireless);
 			name = "";
 		}
 		else
 		{
 		   if(CategoryName.equals("at and t"))
 		   {
-			 for(Map.Entry<String,WirelessPlan> entry : SaxParser4BestDealXMLdataStore1.wirelesses.entrySet())
+			 for(Map.Entry<String,WirelessPlan> entry : allwireless.entrySet())
 			 {
 				if(entry.getValue().getRetailer().equals("AT and T"))
 				 {

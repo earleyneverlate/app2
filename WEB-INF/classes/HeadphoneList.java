@@ -17,17 +17,26 @@ public class HeadphoneList extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		String name = null;
 		String CategoryName = request.getParameter("maker");
+		HashMap<String,Headphones> allheadphones = new HashMap<String, Headphones>();
+
+		try{
+		     allheadphones = MySqlDataStoreUtilities.getHeadphones();
+		}
+		catch(Exception e)
+		{
+			
+		}
 
 		HashMap<String, Headphones> hm = new HashMap<String, Headphones>();
 		if(CategoryName==null){
-			hm.putAll(SaxParser4BestDealXMLdataStore1.headphones);
+			hm.putAll(allheadphones);
 			name = "";
 		}
 		else
 		{
 		   if(CategoryName.equals("apple"))
 		   {
-			 for(Map.Entry<String,Headphones> entry : SaxParser4BestDealXMLdataStore1.headphones.entrySet())
+			 for(Map.Entry<String,Headphones> entry : allheadphones.entrySet())
 			 {
 				if(entry.getValue().getRetailer().equals("Apple"))
 				 {
@@ -38,7 +47,7 @@ public class HeadphoneList extends HttpServlet {
 		   }
 		   else if(CategoryName.equals("sony"))
 		    {
-			for(Map.Entry<String,Headphones> entry : SaxParser4BestDealXMLdataStore1.headphones.entrySet())
+			for(Map.Entry<String,Headphones> entry : allheadphones.entrySet())
 				{
 				 if(entry.getValue().getRetailer().equals("Sony"))
 				 {
