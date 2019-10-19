@@ -49,7 +49,7 @@ public class Registration extends HttpServlet {
 				hm = MySqlDataStoreUtilities.selectUser();
 
 				if(hm.containsKey(username)){
-					error_mg = "Username already exist as " + usertype;
+					error_msg = "Username already exist as " + usertype;
 				}
 				else {
 					User user = new User(username, password, usertype);
