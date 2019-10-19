@@ -26,8 +26,8 @@ public class AjaxUtility {
 			Need to change the way program connected to sql since I have a mac laptop!
 			*/
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/csp584","root","wolverine");							
-			message="Successfull";
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/homework2","root","password");							
+			message="Successful";
 			return message;
 		}
 		catch(SQLException e)
@@ -116,7 +116,7 @@ public class AjaxUtility {
 		}
 		catch(Exception e)
 		{	
-	
+			e.printStackTrace();
 		}		
 	}
 
