@@ -48,7 +48,7 @@ public class ViewReview extends HttpServlet {
 		String city ="";
 			
                 utility.printHtml("Header.html");
-		utility.printHtml("LeftNavigationBar.html");
+		utility.printHtml("Sidebar.html");
 	
                 pw.print("<div id='content'><div class='post'><h2 class='title meta'>");
 		pw.print("<a style='font-size: 24px;'>Review</a>");

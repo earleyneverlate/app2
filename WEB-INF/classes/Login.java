@@ -24,26 +24,24 @@ public class Login extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String usertype = request.getParameter("usertype");
-		HashMap<String, User> hm=new HashMap<String, User>();
-		String TOMCAT_HOME = System.getProperty("catalina.home");
+		HashMap<String, User> hm =new HashMap<String, User>();
+		//String TOMCAT_HOME = System.getProperty("catalina.home");
 		//user details are validated using a file 
 		//if the file containts username and passoword user entered user will be directed to home page
 		//else error message will be shown
 		try
 		{		
-          FileInputStream fileInputStream = new FileInputStream(new File(TOMCAT_HOME+"/webapps/app/UserDetails.txt"));
-          ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);	      
-		  hm = (HashMap)objectInputStream.readObject();
+          hm=MySqlDataStoreUtilities.selectUser();
 		}
 		catch(Exception e)
 		{
-				
+			e.printStackTrace();
 		}
 		User user = hm.get(username);
 		if(user!=null)
 		{
 		 String user_password = user.getPassword();
-		 if (password.equals(user_password)) 
+		 if (password.equals(user_password) && usertype.equals(user.getUsertype())) 
 			{
 			HttpSession session = request.getSession(true);
 			session.setAttribute("username", user.getName());

@@ -102,6 +102,7 @@ public class Utilities extends HttpServlet {
             }
             result = sb.toString();
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return result;
     }
@@ -137,20 +138,19 @@ public class Utilities extends HttpServlet {
     }
 
     /*  getUser Function checks the user is a customer or retailer or manager and returns the user class variable.*/
-    public User getUser() {
-        String usertype = usertype();
-        HashMap<String, User> hm = new HashMap<String, User>();
-        String TOMCAT_HOME = System.getProperty("catalina.home");
-        try {
-            //PLACING USERDETAILS IN FOLDER
-            FileInputStream fileInputStream = new FileInputStream(new File(TOMCAT_HOME + "/webapps/app/UserDetails.txt"));
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            hm = (HashMap) objectInputStream.readObject();
-        } catch (Exception e) {
-        }
-        User user = hm.get(username());
-        return user;
-    }
+    public User getUser(){
+		String usertype = usertype();
+		HashMap<String, User> hm=new HashMap<String, User>();
+		try
+		{		
+			hm=MySqlDataStoreUtilities.selectUser();
+		}
+		catch(Exception e)
+		{
+		}	
+		User user = hm.get(username());
+		return user;
+	}
 
     /*  getCustomerOrders Function gets  the Orders for the user*/
     public ArrayList<OrderItem> getCustomerOrders() {
@@ -161,24 +161,25 @@ public class Utilities extends HttpServlet {
     }
 
     /*  getOrdersPaymentSize Function gets  the size of OrderPayment */
-    public int getOrderPaymentSize() {
-        HashMap<Integer, ArrayList<OrderPayment>> orderPayments = new HashMap<Integer, ArrayList<OrderPayment>>();
-        String TOMCAT_HOME = System.getProperty("catalina.home");
-        try {
-            //PLACING PAYMENT DETAILS IN FOLDER
-            FileInputStream fileInputStream = new FileInputStream(new File(TOMCAT_HOME + "/webapps/app/PaymentDetails.txt"));
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            orderPayments = (HashMap) objectInputStream.readObject();
-        } catch (Exception e) {
-
-        }
-        int size = 0;
-        for (Map.Entry<Integer, ArrayList<OrderPayment>> entry : orderPayments.entrySet()) {
-            size = size + 1;
-
-        }
-        return size;
-    }
+   	public int getOrderPaymentSize(){
+		
+		HashMap<Integer, ArrayList<OrderPayment>> orderPayments = new HashMap<Integer, ArrayList<OrderPayment>>();
+		int size=0;
+		try
+		{
+			orderPayments =MySqlDataStoreUtilities.selectOrder();
+				
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		for(Map.Entry<Integer, ArrayList<OrderPayment>> entry : orderPayments.entrySet()){
+				size=entry.getKey();
+		}
+			
+		return size;		
+	}
 
     /*  CartCount Function gets  the size of User Orders*/
     public int CartCount() {
@@ -195,57 +196,120 @@ public class Utilities extends HttpServlet {
             OrdersHashMap.orders.put(username(), arr);
         }
         ArrayList<OrderItem> orderItems = OrdersHashMap.orders.get(username());
+		HashMap<String,Tv> alltvs = new HashMap<String,Tv> ();
+			HashMap<String,SoundSystem> allsounds = new HashMap<String,SoundSystem> ();
+            HashMap<String,Phone> allphones = new HashMap<String,Phone> ();
+            HashMap<String,Laptop> alllaptops = new HashMap<String,Laptop> ();
+            HashMap<String,VoiceAssistant> allvoices = new HashMap<String,VoiceAssistant> ();
+            HashMap<String,FitnessWatch> allfitness = new HashMap<String,FitnessWatch> ();
+            HashMap<String,Headphones> allheadphones = new HashMap<String,Headphones> ();
+            HashMap<String,WirelessPlan> allwireless = new HashMap<String,WirelessPlan> ();
+			HashMap<String,Accessory> allaccessories=new HashMap<String,Accessory>();
         if (type.equals("tvs")) {
             Tv tv;
-            tv = SaxParser4BestDealXMLdataStore1.tvs.get(name);
+            try{
+			alltvs = MySqlDataStoreUtilities.getTvs();
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+            tv = alltvs.get(name);
             OrderItem orderitem = new OrderItem(tv.getName(), tv.getPrice(), tv.getImage(), tv.getRetailer());
             orderItems.add(orderitem);
         }
         if (type.equals("sounds")) {
             SoundSystem soundSystem;
-            soundSystem = SaxParser4BestDealXMLdataStore1.sounds.get(name);
+            try{
+			allsounds = MySqlDataStoreUtilities.getSounds();
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+            soundSystem = allsounds.get(name);
             OrderItem orderitem = new OrderItem(soundSystem.getName(), soundSystem.getPrice(), soundSystem.getImage(), soundSystem.getRetailer());
             orderItems.add(orderitem);
         }
         if (type.equals("phones")) {
             Phone phone;
-            phone = SaxParser4BestDealXMLdataStore1.phones.get(name);
+            try{
+			allphones = MySqlDataStoreUtilities.getPhones();
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+            phone = allphones.get(name);
             OrderItem orderitem = new OrderItem(phone.getName(), phone.getPrice(), phone.getImage(), phone.getRetailer());
             orderItems.add(orderitem);
         }
         if (type.equals("laptops")) {
             Laptop laptop;
-            laptop = SaxParser4BestDealXMLdataStore1.laptops.get(name);
+            try{
+			alllaptops = MySqlDataStoreUtilities.getLaptops();
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+            laptop = alllaptops.get(name);
             OrderItem orderitem = new OrderItem(laptop.getName(), laptop.getPrice(), laptop.getImage(), laptop.getRetailer());
             orderItems.add(orderitem);
         }
         if (type.equals("voices")) {
             VoiceAssistant voiceAssistant;
-            voiceAssistant = SaxParser4BestDealXMLdataStore1.voices.get(name);
+            try{
+			allvoices = MySqlDataStoreUtilities.getVoices();
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+            voiceAssistant = allvoices.get(name);
             OrderItem orderitem = new OrderItem(voiceAssistant.getName(), voiceAssistant.getPrice(), voiceAssistant.getImage(), voiceAssistant.getRetailer());
             orderItems.add(orderitem);
         }
         if (type.equals("fitnesses")) {
             FitnessWatch fitnessWatch;
-            fitnessWatch = SaxParser4BestDealXMLdataStore1.fitnesses.get(name);
+            try{
+			allfitness = MySqlDataStoreUtilities.getFitnesses();
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+            fitnessWatch = allfitness.get(name);
             OrderItem orderitem = new OrderItem(fitnessWatch.getName(), fitnessWatch.getPrice(), fitnessWatch.getImage(), fitnessWatch.getRetailer());
             orderItems.add(orderitem);
         }
         if (type.equals("smarts")) {
             SmartWatch smartWatch;
-            smartWatch = SaxParser4BestDealXMLdataStore1.smarts.get(name);
+            try{
+			allsmarts = MySqlDataStoreUtilities.getSmarts();
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+            smartWatch = allsmarts.get(name);
             OrderItem orderitem = new OrderItem(smartWatch.getName(), smartWatch.getPrice(), smartWatch.getImage(), smartWatch.getRetailer());
             orderItems.add(orderitem);
         }
         if (type.equals("headphones")) {
             Headphones headphone;
-            headphone = SaxParser4BestDealXMLdataStore1.headphones.get(name);
+            try{
+			allheadphones = MySqlDataStoreUtilities.getHeadphones();
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+            headphone = allheadphones.get(name);
             OrderItem orderitem = new OrderItem(headphone.getName(), headphone.getPrice(), headphone.getImage(), headphone.getRetailer());
             orderItems.add(orderitem);
         }
         if (type.equals("wirelesses")) {
             WirelessPlan wirelessPlan;
-            wirelessPlan = SaxParser4BestDealXMLdataStore1.wirelesses.get(name);
+            try{
+			allwireless = MySqlDataStoreUtilities.getWireless();
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+            wirelessPlan = allwireless.get(name);
             OrderItem orderitem = new OrderItem(wirelessPlan.getName(), wirelessPlan.getPrice(), wirelessPlan.getImage(), wirelessPlan.getRetailer());
             orderItems.add(orderitem);
         }
@@ -256,15 +320,16 @@ public class Utilities extends HttpServlet {
     public void storePayment(int orderId,
                              String orderName, double orderPrice, String userAddress, String creditCardNo) {
         HashMap<Integer, ArrayList<OrderPayment>> orderPayments = new HashMap<Integer, ArrayList<OrderPayment>>();
-        String TOMCAT_HOME = System.getProperty("catalina.home");
+        
         // get the payment details file
-        try {
-            FileInputStream fileInputStream = new FileInputStream(new File(TOMCAT_HOME + "/webapps/app/PaymentDetails.txt"));
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            orderPayments = (HashMap) objectInputStream.readObject();
-        } catch (Exception e) {
-
-        }
+        try
+		{
+			orderPayments=MySqlDataStoreUtilities.selectOrder();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
         if (orderPayments == null) {
             orderPayments = new HashMap<Integer, ArrayList<OrderPayment>>();
         }
@@ -279,19 +344,55 @@ public class Utilities extends HttpServlet {
         listOrderPayment.add(orderpayment);
 
         // add order details into file
-
-        try {
-            //PLACING PAYMENT DETAILS IN FOLDER
-            FileOutputStream fileOutputStream = new FileOutputStream(new File(TOMCAT_HOME + "/webapps/app/PaymentDetails.txt"));
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(orderPayments);
-            objectOutputStream.flush();
-            objectOutputStream.close();
-            fileOutputStream.close();
-        } catch (Exception e) {
-            System.out.println("inside exception file not written properly");
-        }
-    }
+    
+        try
+		{	if(session.getAttribute("usertype").equals("retailer"))
+			{
+				MySqlDataStoreUtilities.insertOrder(orderId,customer,orderName,orderPrice,userAddress,creditCardNo);
+			}else
+				
+				{MySqlDataStoreUtilities.insertOrder(orderId,username(),orderName,orderPrice,userAddress,creditCardNo);}
+		}
+		catch(Exception e)
+		{
+			System.out.println("inside exception file not written properly");
+		}	
+	}
+     public String storeReview(String productname,String producttype,String productmaker,String reviewrating,String reviewdate,String  reviewtext,String reatilerpin,String price,String city){
+	String message=MongoDBDataStoreUtilities.insertReview(productname,username(),producttype,productmaker,reviewrating,reviewdate,reviewtext,reatilerpin,price,city);
+		if(!message.equals("Successful"))
+		{ return "UnSuccessful";
+		}
+		else
+		{
+		HashMap<String, ArrayList<Review>> reviews= new HashMap<String, ArrayList<Review>>();
+		try
+		{
+			reviews=MongoDBDataStoreUtilities.selectReview();
+		}
+		catch(Exception e)
+		{
+			
+		}
+		if(reviews==null)
+		{
+			reviews = new HashMap<String, ArrayList<Review>>();
+		}
+			// if there exist product review already add it into same list for productname or create a new record with product name
+			
+		if(!reviews.containsKey(productname)){	
+			ArrayList<Review> arr = new ArrayList<Review>();
+			reviews.put(productname, arr);
+		}
+		ArrayList<Review> listReview = reviews.get(productname);		
+		Review review = new Review(productname,username(),producttype,productmaker,reviewrating,reviewdate,reviewtext,reatilerpin,price,city);
+		listReview.add(review);	
+			
+			// add Reviews into database
+		
+		return "Successful";	
+		}
+	}
 
 
     public HashMap<String, Tv> getTVsMap() {
@@ -418,10 +519,5 @@ public class Utilities extends HttpServlet {
             ar.add(entry.getValue().getName());
         }
         return ar;
-    }
-
-    public String storeReview(String productname, String producttype, String productmaker, String reviewrating, String reviewdate, String reviewtext, String retailerpin, String productprice, String retailercity) {
-
-        return null;
     }
 }
