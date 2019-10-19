@@ -319,7 +319,7 @@ public class Utilities extends HttpServlet {
 
     // store the payment details for orders
     public void storePayment(int orderId,
-                             String orderName, double orderPrice, String userAddress, String creditCardNo) {
+                             String orderName, double orderPrice, String userAddress, String creditCardNo, String customer) {
         HashMap<Integer, ArrayList<OrderPayment>> orderPayments = new HashMap<Integer, ArrayList<OrderPayment>>();
         
         // get the payment details file
@@ -349,7 +349,7 @@ public class Utilities extends HttpServlet {
         try
 		{	if(session.getAttribute("usertype").equals("retailer"))
 			{
-				MySqlDataStoreUtilities.insertOrder(orderId,orderName,orderPrice,userAddress,creditCardNo);
+				MySqlDataStoreUtilities.insertOrder(orderId,customer,orderName,orderPrice,userAddress,creditCardNo);
 			}else
 				
 				{MySqlDataStoreUtilities.insertOrder(orderId,username(),orderName,orderPrice,userAddress,creditCardNo);}
