@@ -42,6 +42,7 @@ public static String insertReview(String productname,String username,String prod
 		}
 		catch(Exception e)
 		{
+		e.printStackTrace();
 		return "UnSuccessfull";
 		}	
 		
@@ -77,6 +78,7 @@ public static HashMap<String, ArrayList<Review>> selectReview()
 		}
 		catch(Exception e)
 		{
+		 e.printStackTrace();
 		 reviews=null;
 		 return reviews;	
 		}	
@@ -103,7 +105,9 @@ public static HashMap<String, ArrayList<Review>> selectReview()
 		  Bestrate.add(best);
 	  }
 	
-	}catch (Exception e){ System.out.println(e.getMessage());}
+	}catch (Exception e){ 
+		 e.printStackTrace();
+		 System.out.println(e.getMessage());}
    return Bestrate;
   }
   
@@ -132,7 +136,9 @@ public static HashMap<String, ArrayList<Review>> selectReview()
 	  
 	 
 	  
-	}catch (Exception e){ System.out.println(e.getMessage());}
+	}catch (Exception e){ 
+		 e.printStackTrace();
+		System.out.println(e.getMessage());}
       return mostsoldzip;
   }
   
@@ -165,7 +171,10 @@ public static HashMap<String, ArrayList<Review>> selectReview()
 	  
 	 
 	  
-	}catch (Exception e){ System.out.println(e.getMessage());}
+	}catch (Exception e){
+		 e.printStackTrace();
+		 System.out.println(e.getMessage());
+		}
       return mostsold;
   }	
 
@@ -213,14 +222,11 @@ public static ArrayList<Review> selectReviewForChart() {
 
         }
 
-        catch (
-
-        Exception e) {
+        catch (Exception e) 
+		{
+			 e.printStackTrace();
             reviewList = null;
-            
             return reviewList;
-        }
-
-    }
-	
+		}
+    }	
 }	
