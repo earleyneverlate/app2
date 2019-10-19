@@ -202,6 +202,7 @@ public class Utilities extends HttpServlet {
             HashMap<String,Laptop> alllaptops = new HashMap<String,Laptop> ();
             HashMap<String,VoiceAssistant> allvoices = new HashMap<String,VoiceAssistant> ();
             HashMap<String,FitnessWatch> allfitness = new HashMap<String,FitnessWatch> ();
+            HashMap<String,SmartWatch> allsmarts = new HashMap<String,SmartWatch> ();
             HashMap<String,Headphones> allheadphones = new HashMap<String,Headphones> ();
             HashMap<String,WirelessPlan> allwireless = new HashMap<String,WirelessPlan> ();
 			HashMap<String,Accessory> allaccessories=new HashMap<String,Accessory>();
@@ -280,7 +281,7 @@ public class Utilities extends HttpServlet {
         if (type.equals("smarts")) {
             SmartWatch smartWatch;
             try{
-			allsmarts = MySqlDataStoreUtilities.getSmarts();
+            allsmarts= MySqlDataStoreUtilities.getSmarts();
 			}
 			catch(Exception e){
 				e.printStackTrace();
@@ -348,7 +349,7 @@ public class Utilities extends HttpServlet {
         try
 		{	if(session.getAttribute("usertype").equals("retailer"))
 			{
-				MySqlDataStoreUtilities.insertOrder(orderId,customer,orderName,orderPrice,userAddress,creditCardNo);
+				MySqlDataStoreUtilities.insertOrder(orderId,orderName,orderPrice,userAddress,creditCardNo);
 			}else
 				
 				{MySqlDataStoreUtilities.insertOrder(orderId,username(),orderName,orderPrice,userAddress,creditCardNo);}
