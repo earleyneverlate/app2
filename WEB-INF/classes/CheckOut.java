@@ -73,11 +73,18 @@ public class CheckOut extends HttpServlet {
 	    pw.print("Customer Address</td>");
 		pw.print("<td><input type='text' name='userAddress'>");
         pw.print("</td></tr>");
+		if(session.getAttribute("usertype").equals("retailer"))
+		{
+		pw.print("<tr><td>");
+	    pw.print("Customer Name</td>");
+		pw.print("<td><input type='text' name='customername'>");
+        pw.print("</td></tr>");
+		}
 		pw.print("<tr><td colspan='2'>");
 		pw.print("<input type='submit' name='submit' class='btnbuy'>");
         pw.print("</td></tr></table></form>");
 		pw.print("</div></div></div>");		
-		utility.printHtml("Footer.html");
+		utility.printHtml("Footer.html");	
 	    }
         catch(Exception e)
 		{

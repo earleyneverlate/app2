@@ -223,7 +223,7 @@ public class FindReviews extends HttpServlet {
 			}
 				
 		utility.printHtml("Header.html");
-		utility.printHtml("LeftNavigationBar.html");
+		utility.printHtml("Sidebar.html");
 		pw.print("<div id='content'><div class='post'><h2 class='title meta'>");
 		pw.print("<a style='font-size: 24px;'>Data Analytics on Review</a>");
 		pw.print("</h2><div class='entry'>");

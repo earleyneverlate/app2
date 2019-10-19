@@ -25,7 +25,7 @@ public class Cart extends HttpServlet {
 		String type = request.getParameter("type");
 		String maker = request.getParameter("maker");
 		String access = request.getParameter("access");
-		System.out.print("name" + name + "type" + type + "maker" + maker + "accesee" + access);
+		//System.out.print("name" + name + "type" + type + "maker" + maker + "accesee" + access);
 
 		/* StoreProduct Function stores the Purchased product in Orders HashMap.*/	
 		
@@ -41,7 +41,7 @@ public class Cart extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		Utilities utility = new Utilities(request,pw);
 		Carousel carousel = new Carousel();
-		if(!utility.  isLoggedin()){
+		if(!utility.isLoggedin()){
 			HttpSession session = request.getSession(true);				
 			session.setAttribute("login_msg", "Please Login to add items to cart");
 			response.sendRedirect("Login");
