@@ -24,7 +24,7 @@ public class SoundSystemList extends HttpServlet {
 		}
 		catch(Exception e)
 		{
-			
+			e.printStackTrace();
 		}
 
 		HashMap<String, SoundSystem> hm = new HashMap<String, SoundSystem>();

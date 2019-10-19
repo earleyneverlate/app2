@@ -43,58 +43,35 @@ public class Registration extends HttpServlet {
 		}
 		else
 		{
-			HashMap<String, User> hm=new HashMap<String, User>();
-			String TOMCAT_HOME = System.getProperty("catalina.home");
+			HashMap<String, User> hm = new HashMap<String, User>();
+			String message = MySqlDataStoreUtilities.getConnection();
+			if (message.equals("Successful")){
+				hm = MySqlDataStoreUtilities.selectUser();
 
-			//get the user details from file 
-
-			try
-			{
- 			 FileInputStream fileInputStream = new FileInputStream(new File(TOMCAT_HOME+"/webapps/app/UserDetails.txt"));
-			 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);	      
-			 hm= (HashMap)objectInputStream.readObject();
-			}
-			catch(Exception e)
-			{
-				
-			}
-
-			// if the user already exist show error that already exist
-
-			if(hm.containsKey(username))
-				error_msg = "Username already exist as " + usertype;
-			else
-			{
-				/*create a user object and store details into hashmap
-				store the user hashmap into file  */
-
-				User user = new User(username,password,usertype);
-				hm.put(username, user);
-			    FileOutputStream fileOutputStream = new FileOutputStream(TOMCAT_HOME+"/webapps/app/UserDetails.txt");
-        		ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-           	 	objectOutputStream.writeObject(hm);
-				objectOutputStream.flush();
-				objectOutputStream.close();       
-				fileOutputStream.close();
-				HttpSession session = request.getSession(true);				
-				session.setAttribute("login_msg", "Your "+usertype+" account has been created. Please login");
-				if(!utility.isLoggedin()){
-					response.sendRedirect("Login"); return;
-				} else {
-					response.sendRedirect("Account"); return;
+				if(hm.containsKey(username)){
+					error_mg = "Username already exist as " + usertype;
+				}
+				else {
+					User user = new User(username, password, usertype);
+					hm.put(username,user);
+					MySqlDataStoreUtilities.insertUser(username, password, repassword, usertype);
+					HttpSession session = request.getSession(true);
+					if(!utility.isLoggedin()){
+						session.setAttribute("login_msg", "Your " + usertype+ "account has been created. Please login");
+						response.sendRedirect("Login"); return;
+					}
+					else{
+						response.sendRedirect("CustomerCreated"); return;
+					}
 				}
 			}
+		else{
+			error_msg = "MySql server is not up and running";
 		}
-
-		//display the error message
-		if(utility.isLoggedin()){
-			HttpSession session = request.getSession(true);				
-			session.setAttribute("login_msg", error_msg);
-			response.sendRedirect("Account"); return;
-		}
-		displayRegistration(request, response, pw, true);
-		
 	}
+	displayRegistration(request, response, pw, true);
+}
+			
 
 	/*  displayRegistration function displays the Registration page of New User */
 	
