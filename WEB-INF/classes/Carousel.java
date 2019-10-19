@@ -25,8 +25,13 @@ public class Carousel{
 		String name = null;
 		String CategoryName = null;
 		if(CategoryName==null){
-			hm.putAll(SaxParser4BestDealXMLdataStore1.tvs);
-			name = "";
+			try{
+				hm=MySqlDataStoreUtilities.getTvs();
+				name = "";
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
 		}
 		int l =0;
 		for (OrderItem oi : utility.getCustomerOrders())
@@ -62,7 +67,7 @@ public class Carousel{
 				for(Map.Entry<String, String> acc:tv1.getAccessories().entrySet())
 				{
 				
-					Accessory accessory= SaxParser4BestDealXMLdataStore1.accessories.get(acc.getValue());
+					Accessory accessory= MySqlDataStoreUtilities.getAccessories().get(acc.getValue());
 					if (k==0 )
 					{
 						
