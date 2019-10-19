@@ -38,12 +38,12 @@ public static String insertReview(String productname,String username,String prod
 				append("retailercity", retailercity).
 				append("price",(int) Double.parseDouble(price));
 			myReviews.insert(doc);
-			return "Successfull";
+			return "Successful";
 		}
 		catch(Exception e)
 		{
 		e.printStackTrace();
-		return "UnSuccessfull";
+		return "UnSuccessful";
 		}	
 		
 }
@@ -162,9 +162,9 @@ public static HashMap<String, ArrayList<Review>> selectReview()
 	  
       
        
-		String prodcutname =(res.get("_id")).toString();
+		String productname =(res.get("_id")).toString();
         String count = (res.get("count")).toString();	
-        Mostsold mostsld = new Mostsold(prodcutname,count);
+        Mostsold mostsld = new Mostsold(productname,count);
 		mostsold.add(mostsld);
 	
 	  }

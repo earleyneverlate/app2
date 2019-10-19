@@ -48,7 +48,7 @@ public class SubmitReview extends HttpServlet {
                 pw.print("<div id='content'><div class='post'><h2 class='title meta'>");
 		pw.print("<a style='font-size: 24px;'>Review</a>");
 		pw.print("</h2><div class='entry'>");
-      		if(message.equals("Successfull"))
+      		if(message.equals("Successful"))
       		pw.print("<h2>Review for &nbsp"+productname+" Stored </h2>");
                 else
 		pw.print("<h2>Mongo Db is not up and running </h2>");
