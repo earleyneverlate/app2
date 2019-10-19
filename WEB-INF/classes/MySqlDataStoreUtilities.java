@@ -249,7 +249,7 @@ public class MySqlDataStoreUtilities {
             /*if (conn==null){
                 System.out.println("************************************");
             }*/
-            
+
             String selectTv = "select * from  Productdetails where ProductType=?";
             PreparedStatement pst = conn.prepareStatement(selectTv);
             pst.setString(1, "tvs");
@@ -302,6 +302,7 @@ public class MySqlDataStoreUtilities {
 
             }
         } catch (Exception e) {
+             e.printStackTrace();
         }
         return hm;
     }
@@ -323,6 +324,7 @@ public class MySqlDataStoreUtilities {
 
             }
         } catch (Exception e) {
+             e.printStackTrace();
         }
         return hm;
     }
@@ -343,6 +345,7 @@ public class MySqlDataStoreUtilities {
                 laptop.setId(rs.getString("Id"));
             }
         } catch (Exception e) {
+             e.printStackTrace();
         }
         return hm;
     }
@@ -363,6 +366,7 @@ public class MySqlDataStoreUtilities {
                 voice.setId(rs.getString("Id"));
             }
         } catch (Exception e) {
+             e.printStackTrace();
         }
         return hm;
     }
@@ -383,6 +387,7 @@ public class MySqlDataStoreUtilities {
                 fitness.setId(rs.getString("Id"));
             }
         } catch (Exception e) {
+             e.printStackTrace();
         }
         return hm;
     }
@@ -403,6 +408,7 @@ public class MySqlDataStoreUtilities {
                 smart.setId(rs.getString("Id"));
             }
         } catch (Exception e) {
+             e.printStackTrace();
         }
         return hm;
     }
@@ -423,6 +429,7 @@ public class MySqlDataStoreUtilities {
                 headphone.setId(rs.getString("Id"));
             }
         } catch (Exception e) {
+             e.printStackTrace();
         }
         return hm;
     }
@@ -443,6 +450,7 @@ public class MySqlDataStoreUtilities {
                 wireless.setId(rs.getString("Id"));
             }
         } catch (Exception e) {
+             e.printStackTrace();
         }
         return hm;
     }
@@ -464,6 +472,7 @@ public class MySqlDataStoreUtilities {
 
             }
         } catch (Exception e) {
+             e.printStackTrace();
         }
         return hm;
     }
@@ -554,6 +563,7 @@ public class MySqlDataStoreUtilities {
             pst.executeUpdate();
         } catch (Exception e) {
             msg = "Proudct cannot be deleted";
+             e.printStackTrace();
         }
         return msg;
     }
@@ -568,7 +578,7 @@ public class MySqlDataStoreUtilities {
             pst.setString(2, orderName);
             pst.executeUpdate();
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -590,7 +600,7 @@ public class MySqlDataStoreUtilities {
             pst.setString(6, creditCardNo);
             pst.execute();
         } catch (Exception e) {
-
+             e.printStackTrace();
         }
     }
 
@@ -622,7 +632,7 @@ public class MySqlDataStoreUtilities {
 
 
         } catch (Exception e) {
-
+             e.printStackTrace();
         }
         return orderPayments;
     }
@@ -642,7 +652,7 @@ public class MySqlDataStoreUtilities {
             pst.setString(4, usertype);
             pst.execute();
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -658,6 +668,7 @@ public class MySqlDataStoreUtilities {
                 hm.put(rs.getString("username"), user);
             }
         } catch (Exception e) {
+             e.printStackTrace();
         }
         return hm;
     }
