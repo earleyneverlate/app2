@@ -5,20 +5,21 @@ public class MySqlDataStoreUtilities {
     static Connection conn = null;
     static String message;
 
-    public static String getConnection() {
+    public static Connection getConnection() {
 
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/homework2", "root", "password");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/homework2?serverTimezone=UTC", "root", "password");
             message = "Successfull";
-            return message;
+            return conn;
         } catch (SQLException e) {
             message = "unsuccessful";
             e.printStackTrace();
-            return message;
+            return null;
         } catch (Exception e) {
             message = e.getMessage();
-            return message;
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -29,7 +30,7 @@ public class MySqlDataStoreUtilities {
             getConnection();
 
 
-            String truncatetableacc = "delete from Product_accessories;";
+            String truncatetableacc = "delete from ProductAccessories;";
             PreparedStatement pstt = conn.prepareStatement(truncatetableacc);
             pstt.executeUpdate();
 
@@ -77,7 +78,7 @@ public class MySqlDataStoreUtilities {
                 pst.executeUpdate();
                 try {
                     HashMap<String, String> acc = tv.getAccessories();
-                    String insertAccessoryQurey = "INSERT INTO  Product_accessories(productName,accessoriesName)" +
+                    String insertAccessoryQurey = "INSERT INTO  ProductAccessories(productName,accessoriesName)" +
                             "VALUES (?,?);";
                     for (Map.Entry<String, String> accentry : acc.entrySet()) {
                         PreparedStatement pstacc = conn.prepareStatement(insertAccessoryQurey);
@@ -242,22 +243,24 @@ public class MySqlDataStoreUtilities {
     public static HashMap<String, Tv> getTvs() {
         HashMap<String, Tv> hm = new HashMap<String, Tv>();
         try {
-            System.out.println("************************************");
-            getConnection();
-
+        // System.out.println("************************************");
+           conn
+           \= getConnection();
+            if (conn==null){
+                System.out.println("************************************");
+            }
             String selectTv = "select * from  Productdetails where ProductType=?";
             PreparedStatement pst = conn.prepareStatement(selectTv);
             pst.setString(1, "tvs");
             ResultSet rs = pst.executeQuery();
-            System.out.println("************************************");
-
+           
             while (rs.next()) {
                 Tv tv = new Tv(rs.getString("productName"), rs.getDouble("productPrice"), rs.getString("productImage"), rs.getString("productManufacturer"), rs.getString("productCondition"), rs.getDouble("productDiscount"));
                 hm.put(rs.getString("Id"), tv);
                 tv.setId(rs.getString("Id"));
 
                 try {
-                    String selectaccessory = "Select * from Product_accessories where productName=?";
+                    String selectaccessory = "Select * from ProductAccessories where productName=?";
                     PreparedStatement pstacc = conn.prepareStatement(selectaccessory);
                     pstacc.setString(1, rs.getString("Id"));
                     ResultSet rsacc = pstacc.executeQuery();
@@ -276,6 +279,7 @@ public class MySqlDataStoreUtilities {
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return hm;
     }
@@ -486,7 +490,7 @@ public class MySqlDataStoreUtilities {
             pst.executeUpdate();
             try {
                 if (!prod.isEmpty()) {
-                    String addaprodacc = "INSERT INTO  Product_accessories(productName,accessoriesName)" +
+                    String addaprodacc = "INSERT INTO  ProductAccessories(productName,accessoriesName)" +
                             "VALUES (?,?);";
                     PreparedStatement pst1 = conn.prepareStatement(addaprodacc);
                     pst1.setString(1, prod);
@@ -597,7 +601,7 @@ public class MySqlDataStoreUtilities {
 
             getConnection();
             //select the table
-            String selectOrderQuery = "select * from customerorders";
+            String selectOrderQuery = "select * from CustomerOrders";
             PreparedStatement pst = conn.prepareStatement(selectOrderQuery);
             ResultSet rs = pst.executeQuery();
             ArrayList<OrderPayment> orderList = new ArrayList<OrderPayment>();
