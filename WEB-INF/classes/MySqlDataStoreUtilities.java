@@ -10,10 +10,12 @@ public class MySqlDataStoreUtilities {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/homework2?serverTimezone=UTC", "root", "password");
+            System.out.println("successful");
             message = "Successful";
             return message;
         } catch (SQLException e) {
             message = "unsuccessful";
+            System.out.println("unsuccessful");
             e.printStackTrace();
             return message;
         } catch (Exception e) {
@@ -640,8 +642,8 @@ public class MySqlDataStoreUtilities {
 
     public static void insertUser(String username, String password, String repassword, String usertype) {
         try {
-
             getConnection();
+            System.out.println("registration1");
             String insertIntoCustomerRegisterQuery = "INSERT INTO Registration(username,password,repassword,usertype) "
                     + "VALUES (?,?,?,?);";
 
@@ -660,6 +662,7 @@ public class MySqlDataStoreUtilities {
         HashMap<String, User> hm = new HashMap<String, User>();
         try {
             getConnection();
+            System.out.println("registration2");
             Statement stmt = conn.createStatement();
             String selectCustomerQuery = "select * from  Registration";
             ResultSet rs = stmt.executeQuery(selectCustomerQuery);
