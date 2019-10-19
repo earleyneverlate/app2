@@ -5,21 +5,21 @@ public class MySqlDataStoreUtilities {
     static Connection conn = null;
     static String message;
 
-    public static Connection getConnection() {
+    public static String getConnection() {
 
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/homework2?serverTimezone=UTC", "root", "password");
-            message = "Successfull";
-            return conn;
+            message = "Successful";
+            return message;
         } catch (SQLException e) {
             message = "unsuccessful";
             e.printStackTrace();
-            return null;
+            return message;
         } catch (Exception e) {
             message = e.getMessage();
             e.printStackTrace();
-            return null;
+            return message;
         }
     }
 
@@ -244,11 +244,12 @@ public class MySqlDataStoreUtilities {
         HashMap<String, Tv> hm = new HashMap<String, Tv>();
         try {
         // System.out.println("************************************");
-           conn
-           \= getConnection();
-            if (conn==null){
+            getConnection();
+
+            /*if (conn==null){
                 System.out.println("************************************");
-            }
+            }*/
+            
             String selectTv = "select * from  Productdetails where ProductType=?";
             PreparedStatement pst = conn.prepareStatement(selectTv);
             pst.setString(1, "tvs");
