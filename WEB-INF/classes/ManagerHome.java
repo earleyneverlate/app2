@@ -26,7 +26,6 @@ public class ManagerHome extends HttpServlet {
 
 		Utilities utility = new Utilities(request, pw);
 		utility.printHtml("Header.html");
-		utility.printHtml("Sidebar.html");
 		pw.print("<div class='post' style='float: none; width: 100%'>");
 		//pw.print("<h2 class='title meta'><a style='font-size: 24px;'>Login</a></h2>"
 			//	+ "<div class='entry'>"

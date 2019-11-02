@@ -28,9 +28,7 @@ public class MySqlDataStoreUtilities {
     public static void Insertproducts() {
         try {
 
-
             getConnection();
-
 
             String truncatetableacc = "delete from ProductAccessories;";
             PreparedStatement pstt = conn.prepareStatement(truncatetableacc);
