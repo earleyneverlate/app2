@@ -18,8 +18,6 @@ public class ManagerHome extends HttpServlet {
 		displayLogin(request, response, pw, false);
 	}
 
-
-	/*  Login Screen is Displayed, Registered User specifies credentials and logins into the Game Speed Application. */
 	protected void displayLogin(HttpServletRequest request,
 			HttpServletResponse response, PrintWriter pw, boolean error)
 			throws ServletException, IOException {
@@ -27,9 +25,6 @@ public class ManagerHome extends HttpServlet {
 		Utilities utility = new Utilities(request, pw);
 		utility.printHtml("Header.html");
 		pw.print("<div class='post' style='float: none; width: 100%'>");
-		//pw.print("<h2 class='title meta'><a style='font-size: 24px;'>Login</a></h2>"
-			//	+ "<div class='entry'>"
-			//	+ "<div style='width:400px; margin:25px; margin-left: auto;margin-right: auto;'>");
 		pw.print("<div id='content'><div class='post'><h2 class='title meta'>");
 		pw.print("<form method='get' action='ProductModify'>"
 				+ "<table style='width:100%'><tr><td>"

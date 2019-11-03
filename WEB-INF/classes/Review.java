@@ -19,10 +19,20 @@ public class Review implements Serializable{
 	private String reviewDate;
 	private String reviewText;
 	private String retailerpin;
+	private String retailername;
 	private String price;
 	private String retailercity;
+	private String userId;
+	private String userAge;
+	private String userOcc;
+	private String gender;
+	private String productSale;
+	private String productCount;
 	
-	public Review (String productName,String userName,String productType,String productMaker,String reviewRating,String reviewDate,String reviewText,String retailerpin,String price,String retailercity){
+	public Review (String productName,String userName,String productType,
+	String productMaker,String reviewRating,String reviewDate,String reviewText,
+	String retailerpin,String price,String retailercity, String retailername,
+	String userId, String userAge, String userOcc, String gender, String productSale){
 		this.productName=productName;
 		this.userName=userName;
 		this.productType=productType;
@@ -31,8 +41,14 @@ public class Review implements Serializable{
 		this.reviewDate=reviewDate;
 	 	this.reviewText=reviewText;
 		this.retailerpin=retailerpin;
+		this.retailername=retailername;
 		this.price= price;
 		this.retailercity= retailercity;
+		this.userId=userId;
+		this.userAge=userAge;
+		this.userOcc=userOcc;
+		this.gender=gender;
+		this.productSale=productSale;
 	}
 
 	public Review(String productName, String retailerpin, String reviewRating, String reviewText) {
@@ -41,6 +57,24 @@ public class Review implements Serializable{
        this.reviewRating = reviewRating;
        this.reviewText = reviewText;
     }
+	public Review(String productName, String price, String productCount) {
+       this.productName = productName;
+       this.price = price;
+       this.productCount = productCount;
+	}
+
+	public Review(String reviewDate,  String productCount) {
+       this.reviewDate = reviewDate;
+       this.productCount = productCount;
+	}
+	
+	public String getProductCount() {
+		return productCount;
+	}
+
+	public void setProductCount(String productCount) {
+		this.productCount = productCount;
+	}
 
 	public String getProductName() {
 		return productName;
@@ -117,5 +151,53 @@ public class Review implements Serializable{
 		this.price = price;
 	}
 
+	public String getRetailerName() {
+		return retailername;
+	}
+
+	public void setRetailerName(String retailername) {
+		this.retailername = retailername;
+	}
+
+	public String getUserID() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getUserAge() {
+		return userAge;
+	}
+
+	public void setUserAge(String userAge) {
+		this.userAge = userAge;
+	}	
+
+	public String getUserOccupation() {
+		return userOcc;
+	}
+
+	public void setUserOccupation(String userOcc) {
+		this.userOcc = userOcc;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getProductonSale() {
+		return productSale;
+	}
+
+	public void setProductonSale(String productSale) {
+		this.productSale = productSale;
+	}	
 }
+
 
