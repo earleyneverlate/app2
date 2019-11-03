@@ -143,7 +143,7 @@ public class Review implements Serializable{
 		this.retailercity = retailercity;
 	}
 	
-			public String getPrice() {
+	public String getPrice() {
 		return price;
 	}
 

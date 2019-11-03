@@ -17,7 +17,6 @@ public class Cart extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter pw = response.getWriter();
 
-
 		/* From the HttpServletRequest variable name,type,maker and acessories information are obtained.*/
 
 		Utilities utility = new Utilities(request, pw);

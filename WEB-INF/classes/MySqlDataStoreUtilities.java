@@ -673,6 +673,123 @@ public class MySqlDataStoreUtilities {
         }
         return hm;
     }
+    public static HashMap<String, Product> productssales(){
+		try{
+				getConnection();
+				HashMap<String, Product> products=new HashMap<String, Product>();
+				String selectProductQuery ="select * from Productdetails where Productquantity>0";
+				PreparedStatement pst = conn.prepareStatement(selectProductQuery);
+				ResultSet rs = pst.executeQuery();
+				
+				while(rs.next()){
+					Product product = new Product();					
+					product.setName(rs.getString("productName"));
+					product.setPrice(rs.getDouble("productPrice"));
+					
+					
+					products.put(product.getName(),product);
+				}
+				
+				pst.close();
+				conn.close();
+				return products;
+				
+			
+			}
+		catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}		
+	}
+public static HashMap<String, Product> prodrebate(){
+		try{
+				getConnection();
+				HashMap<String, Product> products=new HashMap<String, Product>();
+				String selectProductQuery ="select * from productdetails where rebate>0";
+				PreparedStatement pst = conn.prepareStatement(selectProductQuery);
+				ResultSet rs = pst.executeQuery();
+				
+				while(rs.next()){
+					Product product = new Product();					
+					//product.setId(rs.getString("id"));
+					product.setName(rs.getString("productName"));
+				
+					product.setRebateAmount(rs.getDouble("rebate"));
+					
+					
+					products.put(product.getName(),product);
+				}
+				
+				pst.close();
+				conn.close();
+				return products;
+				
+			
+			}
+		catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}		
+	}
+public static HashMap<String, Product> getsales(){
+		try{
+				
+				getConnection();	
+				HashMap<String, Product> products=new HashMap<String, Product>();
+				String selectProductQuery ="select orderName, orderPrice, count(orderName) as cnt, sum(orderPrice) as total from customerorders group by orderName;";
+				PreparedStatement pst1 = conn.prepareStatement(selectProductQuery);
+				ResultSet rs = pst1.executeQuery();
+				
+				while(rs.next()){
+					Product product = new Product();
+					product.setName(rs.getString("orderName"));
+					product.setPrice(rs.getDouble("orderPrice"));
+					product.setProductCount(rs.getDouble("count"));
+					product.setTotal(rs.getDouble("total"));
 
+					products.put(product.getName(),product);
+				}
+				
+				pst1.close();
+				conn.close();
+				return products;
+				
+			}
+		catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}		
+	}
+
+public static HashMap<String, Product> getProductsinventory(){
+		try{
+				
+			    getConnection();			
+				HashMap<String, Product> products=new HashMap<String, Product>();
+				String selectProductQuery ="select * from productdetails;";
+				PreparedStatement pst1 = conn.prepareStatement(selectProductQuery);
+				ResultSet rs = pst1.executeQuery();
+				
+				while(rs.next()){
+					Product product = new Product();
+					product.setName(rs.getString("productName"));
+					product.setPrice(rs.getDouble("productPrice"));
+					product.setProductCount(rs.getDouble("ProductQuantity"));
+					
+					products.put(product.getName(),product);
+				}
+				
+				pst1.close();
+				conn.close();
+				return products;
+				
+			}
+		catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}		
+	}
+
+}
 
 }   

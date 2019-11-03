@@ -12,6 +12,10 @@ public class Product {
 	private String condition;
 	private String type;
 	private double discount;
+ 	private Double rebateAmount;
+	private Double productCount;
+	private Double total;	
+	String orderDate;
 	HashMap<String,String> accessories;
 	public Product(String id,String name, double price, String image, String retailer,String condition,String type,double discount){
 		this.id=id;
@@ -51,7 +55,6 @@ public class Product {
 		this.type =type;
 	}
 
-
 	public double getPrice() {
 		return price;
 	}
@@ -90,5 +93,34 @@ public class Product {
 	public void setDiscount(double discount) {
 		this.discount = discount;
 	}
+
+	public void setRebateAmount(Double rebateAmount) {
+		this.rebateAmount = rebateAmount;
+	}
+
+	public Double getRebateAmount() {
+		return rebateAmount;
+	}
+	public void setProdcount(Double productCount) {
+		this.productCount = productCount;
+	}
+
+	public Double getProdcount() {
+		return productCount;
+	}
+
+	public void setorderDate(String orderDate) {
+		this.orderDate = orderDate;
+	}
 	
+	public String getorderDate() {
+		return orderDate;
+	}	
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+
+	public Double getTotal() {
+		return total;
+	}
 }
