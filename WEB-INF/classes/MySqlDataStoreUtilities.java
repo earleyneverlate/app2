@@ -509,16 +509,14 @@ public class MySqlDataStoreUtilities {
 
                 }
             } catch (Exception e) {
-                msg = "Erro while adding the product";
+                msg = "Error cannot add product. Try again.";
                 e.printStackTrace();
 
             }
 
-
         } catch (Exception e) {
-            msg = "Error while adding the product";
+            msg = "Error cannot add product. Try again.";
             e.printStackTrace();
-
         }
         return msg;
     }
@@ -572,7 +570,7 @@ public class MySqlDataStoreUtilities {
         try {
 
             getConnection();
-            String deleteOrderQuery = "Delete from customerorders where OrderId=? and orderName=?";
+            String deleteOrderQuery = "Delete from CustomerOrders where OrderId=? and orderName=?";
             PreparedStatement pst = conn.prepareStatement(deleteOrderQuery);
             pst.setInt(1, orderId);
             pst.setString(2, orderName);
@@ -587,7 +585,7 @@ public class MySqlDataStoreUtilities {
 
             getConnection();
 
-            String insertIntoCustomerOrderQuery = "INSERT INTO customerOrders(OrderId,UserName,OrderName,OrderPrice,userAddress,creditCardNo) "
+            String insertIntoCustomerOrderQuery = "INSERT INTO CustomerOrders(OrderId,UserName,OrderName,OrderPrice,userAddress,creditCardNo) "
                     + "VALUES (?,?,?,?,?,?);";
 
             PreparedStatement pst = conn.prepareStatement(insertIntoCustomerOrderQuery);
@@ -673,11 +671,11 @@ public class MySqlDataStoreUtilities {
         }
         return hm;
     }
-    public static HashMap<String, Product> productssales(){
+    public static HashMap<String, Product> productsOnSales(){
 		try{
 				getConnection();
 				HashMap<String, Product> products=new HashMap<String, Product>();
-				String selectProductQuery ="select * from Productdetails where Productquantity>0";
+				String selectProductQuery ="select * from Productdetails where quantity>0";
 				PreparedStatement pst = conn.prepareStatement(selectProductQuery);
 				ResultSet rs = pst.executeQuery();
 				
@@ -701,11 +699,11 @@ public class MySqlDataStoreUtilities {
 			return null;
 		}		
 	}
-public static HashMap<String, Product> prodrebate(){
+    public static HashMap<String, Product> manufacturerRebates(){                                                          (){
 		try{
 				getConnection();
 				HashMap<String, Product> products=new HashMap<String, Product>();
-				String selectProductQuery ="select * from productdetails where rebate>0";
+				String selectProductQuery ="select * from Productdetails where rebates >0";
 				PreparedStatement pst = conn.prepareStatement(selectProductQuery);
 				ResultSet rs = pst.executeQuery();
 				
@@ -713,30 +711,25 @@ public static HashMap<String, Product> prodrebate(){
 					Product product = new Product();					
 					//product.setId(rs.getString("id"));
 					product.setName(rs.getString("productName"));
-				
-					product.setRebateAmount(rs.getDouble("rebate"));
-					
-					
+					product.setRebates(rs.getDouble("rebates"));		
 					products.put(product.getName(),product);
-				}
-				
+				}	
 				pst.close();
 				conn.close();
-				return products;
-				
-			
+				return products;	
 			}
 		catch(Exception e){
 			e.printStackTrace();
 			return null;
 		}		
-	}
-public static HashMap<String, Product> getsales(){
+    }
+
+    public static HashMap<String, Product> getsales(){
 		try{
 				
 				getConnection();	
 				HashMap<String, Product> products=new HashMap<String, Product>();
-				String selectProductQuery ="select orderName, orderPrice, count(orderName) as cnt, sum(orderPrice) as total from customerorders group by orderName;";
+				String selectProductQuery ="select orderName, orderPrice, count(orderName) as count, sum(orderPrice) as total from customerorders group by orderName;";
 				PreparedStatement pst1 = conn.prepareStatement(selectProductQuery);
 				ResultSet rs = pst1.executeQuery();
 				
@@ -748,25 +741,23 @@ public static HashMap<String, Product> getsales(){
 					product.setTotal(rs.getDouble("total"));
 
 					products.put(product.getName(),product);
-				}
-				
+				}	
 				pst1.close();
 				conn.close();
 				return products;
-				
 			}
-		catch(Exception e){
-			e.printStackTrace();
-			return null;
-		}		
-	}
+		    catch(Exception e){
+			    e.printStackTrace();
+			    return null;
+            }	
+        }    	
 
-public static HashMap<String, Product> getProductsinventory(){
+    public static HashMap<String, Product> getProductInventory(){
 		try{
 				
 			    getConnection();			
 				HashMap<String, Product> products=new HashMap<String, Product>();
-				String selectProductQuery ="select * from productdetails;";
+				String selectProductQuery ="select * from Productdetails;";
 				PreparedStatement pst1 = conn.prepareStatement(selectProductQuery);
 				ResultSet rs = pst1.executeQuery();
 				
@@ -789,7 +780,4 @@ public static HashMap<String, Product> getProductsinventory(){
 			return null;
 		}		
 	}
-
-}
-
 }   

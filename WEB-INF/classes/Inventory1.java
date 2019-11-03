@@ -32,7 +32,7 @@ public class Inventory1 extends HttpServlet {
 			throws ServletException, IOException {
 
 		Utilities utility = new Utilities(request, pw);
-		HashMap<String,Product> pMap = MySqlDataStoreUtilities.getProductsInventory();
+		HashMap<String,Product> pMap = MySqlDataStoreUtilities.getProductInventory();
 
 		utility.printHtml("Header.html");
 		pw.print("<table style=\"font-size:12px; width:80%;color:#4076AB\">");

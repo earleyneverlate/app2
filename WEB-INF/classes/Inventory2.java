@@ -41,7 +41,7 @@ public class Inventory2 extends HttpServlet {
 
 		try
 		{
-			Map<String,Product> pMap = MySqlDataStoreUtilities.getProductsInventory();
+			Map<String,Product> pMap = MySqlDataStoreUtilities.getProductInventory();
 
 			pw.print("<script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>");
             pw.print("<script type='text/javascript'>");

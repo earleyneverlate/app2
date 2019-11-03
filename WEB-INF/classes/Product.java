@@ -94,18 +94,18 @@ public class Product {
 		this.discount = discount;
 	}
 
-	public void setRebateAmount(Double rebateAmount) {
+	public void setRebates(Double rebateAmount) {
 		this.rebateAmount = rebateAmount;
 	}
 
-	public Double getRebateAmount() {
+	public Double getRebates() {
 		return rebateAmount;
 	}
-	public void setProdcount(Double productCount) {
+	public void setProductCount(Double productCount) {
 		this.productCount = productCount;
 	}
 
-	public Double getProdcount() {
+	public Double getProductCount() {
 		return productCount;
 	}
 
