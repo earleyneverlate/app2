@@ -243,12 +243,8 @@ public class MySqlDataStoreUtilities {
     public static HashMap<String, Tv> getTvs() {
         HashMap<String, Tv> hm = new HashMap<String, Tv>();
         try {
-        // System.out.println("************************************");
-            getConnection();
 
-            /*if (conn==null){
-                System.out.println("************************************");
-            }*/
+            getConnection();
 
             String selectTv = "select * from  Productdetails where ProductType=?";
             PreparedStatement pst = conn.prepareStatement(selectTv);
@@ -806,5 +802,26 @@ public class MySqlDataStoreUtilities {
 			e.printStackTrace();
 			return null;
 		}		
-	}
+    }
+    //search bar
+    public static HashMap<String,Product> getData()
+	{
+		HashMap<String,Product> hm=new HashMap<String,Product>();
+		try
+		{
+			getConnection();
+			Statement stmt=conn.createStatement();
+			String selectCustomerQuery="select * from  Productdetails";
+			ResultSet rs = stmt.executeQuery(selectCustomerQuery);
+			while(rs.next())
+			{	Product p = new Product(rs.getString("Id"),rs.getString("productName"),rs.getDouble("productPrice"),rs.getString("productImage"),rs.getString("productManufacturer"),rs.getString("productCondition"),rs.getString("ProductType"),rs.getDouble("productDiscount"));
+				hm.put(rs.getString("Id"), p);
+			}
+		}
+		catch(Exception e)
+		{
+		    e.printStackTrace();	
+		}
+		return hm;			
+    }
 }   
