@@ -109,11 +109,11 @@ public class Product {
 		return productCount;
 	}
 
-	public void setorderDate(String orderDate) {
+	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
 	
-	public String getorderDate() {
+	public String getOrderDate() {
 		return orderDate;
 	}	
 	public void setTotal(Double total) {

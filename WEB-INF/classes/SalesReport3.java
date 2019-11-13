@@ -34,11 +34,9 @@ public class SalesReport3 extends HttpServlet {
 			throws ServletException, IOException {
 
 		Utilities utility = new Utilities(request, pw);
-		HashMap<String,Product> pMap = MySqlDataStoreUtilities.getsalesdaily();
-	
+		HashMap<String,Product> pMap = MySqlDataStoreUtilities.getDailySales();
 
 		utility.printHtml("Header.html");
-		//utility.printHtml("LeftNavigationBar.html");
 		pw.println("<table style=\"font-size:12px; width:80%;color:#4076AB\">");
 					pw.println("<tr>");
 					pw.println("<h1 style=\"color: #7D7D7D;border-bottom: 2px solid #7D7D7D;\">Sales Table: all products sold</h1>");
@@ -70,7 +68,7 @@ public class SalesReport3 extends HttpServlet {
 								pw.println("<table style=\"font-size:12px; width:80%;color:#4076AB\">");			    
 								pw.println("<tr>");
 								pw.println("<td  width=\"50%\">");
-								pw.println("<span style=\"font-size:12px;font-weight: bold\">"+product.getorderDate()+"</span>");				   
+								pw.println("<span style=\"font-size:12px;font-weight: bold\">"+product.getOrderDate()+"</span>");				   
 								pw.println("</td>");	
                                 pw.println("<td align=\"center\" width=\"50%\">");	
 								pw.println("<span style=\"font-size:12px;font-weight: bold\">"+product.getTotal()+"</span>");						

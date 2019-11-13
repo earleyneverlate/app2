@@ -41,7 +41,7 @@ public class SalesReport2 extends HttpServlet {
 
 		try
 		{
-			Map<String,Product> pMap = MySqlDataStoreUtilities.getsales();
+			Map<String,Product> pMap = MySqlDataStoreUtilities.getSales();
 
 			pw.print("<script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>");
             pw.print("<script type='text/javascript'>");

@@ -609,7 +609,6 @@ public class MySqlDataStoreUtilities {
         try {
 
             getConnection();
-            //select the table
             String selectOrderQuery = "select * from CustomerOrders";
             PreparedStatement pst = conn.prepareStatement(selectOrderQuery);
             ResultSet rs = pst.executeQuery();
@@ -671,6 +670,34 @@ public class MySqlDataStoreUtilities {
         }
         return hm;
     }
+
+    public static HashMap<String, Product> getDailySales(){
+		try{
+				
+				getConnection();	
+				HashMap<String, Product> products=new HashMap<String, Product>();
+				String selectProductQuery ="select orderDate, sum(orderPrice) as total from customerorders group by orderDate;";
+				PreparedStatement pst1 = conn.prepareStatement(selectProductQuery);
+				ResultSet rs = pst1.executeQuery();
+				
+				while(rs.next()){
+					Product product = new Product();
+					product.setOrderDate(rs.getString("orderDate"));
+					product.setTotal(rs.getDouble("total"));
+					
+					products.put(product.getOrderDate(),product);
+				}
+				
+				pst1.close();
+				conn.close();
+				return products;
+				
+			}
+		catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}		
+	}
     public static HashMap<String, Product> productsOnSales(){
 		try{
 				getConnection();
@@ -700,7 +727,7 @@ public class MySqlDataStoreUtilities {
 		}		
 	}
     public static HashMap<String, Product> manufacturerRebates(){                                                          (){
-		try{
+	    try{
 				getConnection();
 				HashMap<String, Product> products=new HashMap<String, Product>();
 				String selectProductQuery ="select * from Productdetails where rebates >0";
@@ -709,7 +736,6 @@ public class MySqlDataStoreUtilities {
 				
 				while(rs.next()){
 					Product product = new Product();					
-					//product.setId(rs.getString("id"));
 					product.setName(rs.getString("productName"));
 					product.setRebates(rs.getDouble("rebates"));		
 					products.put(product.getName(),product);
@@ -718,13 +744,14 @@ public class MySqlDataStoreUtilities {
 				conn.close();
 				return products;	
 			}
-		catch(Exception e){
-			e.printStackTrace();
-			return null;
-		}		
+		    catch(Exception e){
+			    e.printStackTrace();
+			    return null;
+            }
+        }		
     }
 
-    public static HashMap<String, Product> getsales(){
+    public static HashMap<String, Product> getSales(){
 		try{
 				
 				getConnection();	

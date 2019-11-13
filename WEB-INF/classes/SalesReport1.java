@@ -36,7 +36,7 @@ public class SalesReport1 extends HttpServlet {
 		Utilities utility = new Utilities(request, pw);
 
 		utility.printHtml("Header.html");
-		HashMap<String,Product> pMap = MySqlDataStoreUtilities.getsales();
+		HashMap<String,Product> pMap = MySqlDataStoreUtilities.getSales();
 
 		pw.println("<table style=\"font-size:12px; width:100%;color:#4076AB\">");					
 					pw.println("<tr>");
