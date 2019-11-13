@@ -13,7 +13,7 @@ public class Startup extends HttpServlet
 
 	public void init() throws ServletException
     {
-		SaxParser4BestDealXMLdataStore1.addHashmap();
-
+      SaxParser4BestDealXMLdataStore1.addHashmap();
+      MySqlDataStoreUtilities.Insertproducts(); //search bar
     }
 }
