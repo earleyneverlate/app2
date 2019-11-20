@@ -235,7 +235,7 @@ public class ProductCrud extends HttpServlet {
 				
 				  try
 				  {
-//					msg = MySqlDataStoreUtilities.updateproducts(producttype,productId,productName,productPrice,productImage,productManufacturer,productCondition,productDiscount);
+					msg = MySqlDataStoreUtilities.updateproducts(producttype,productId,productName,productPrice,productImage,productManufacturer,productCondition,productDiscount);
 				  }
 				  catch(Exception e)
 				  { 
@@ -301,8 +301,7 @@ public class ProductCrud extends HttpServlet {
 					
 					  try
 					  {  
-						
-//						 msg = MySqlDataStoreUtilities.deleteproducts(productId);
+						 msg = MySqlDataStoreUtilities.deleteproducts(productId);
 					  }
 					  catch(Exception e)
 					  { 

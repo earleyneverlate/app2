@@ -80,7 +80,7 @@ public class Inventory3 extends HttpServlet {
 						}
 					}
 					else{
-                        e.printStackTrace();
+                        //e.printStackTrace();
 						pw.println("<br/>");
 						pw.println("<br/>");
 						pw.println("<h3>SQL server is not running. Try again.</h3>");

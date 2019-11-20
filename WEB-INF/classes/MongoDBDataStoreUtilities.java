@@ -69,7 +69,9 @@ public static HashMap<String, ArrayList<Review>> selectReview()
 			}
 			ArrayList<Review> listReview = reviews.get(obj.getString("productName"));		
 			Review review =new Review(obj.getString("productName"),obj.getString("userName"),obj.getString("productType"),obj.getString("productMaker"),
-				obj.getString("reviewRating"),obj.getString("reviewDate"),obj.getString("reviewText"),obj.getString("retailerpin"),obj.getString("price"),obj.getString("retailercity"));
+				obj.getString("reviewRating"),obj.getString("reviewDate"),obj.getString("reviewText"),obj.getString("retailerpin"),obj.getString("price"),obj.getString("retailercity"),
+				obj.getString("retailername"), obj.getString("userId"), obj.getString("userAge"), obj.getString("userOcc"),
+				obj.getString("gender"), obj.getString("productSale"));
 			//add to review hashmap
 			listReview.add(review);
 		

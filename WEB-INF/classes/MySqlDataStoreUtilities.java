@@ -694,7 +694,8 @@ public class MySqlDataStoreUtilities {
 			return null;
 		}		
 	}
-    public static HashMap<String, Product> productsOnSales(){
+    public static HashMap<String, Product> productsOnSales()
+    {
 		try{
 				getConnection();
 				HashMap<String, Product> products=new HashMap<String, Product>();
@@ -714,15 +715,15 @@ public class MySqlDataStoreUtilities {
 				pst.close();
 				conn.close();
 				return products;
-				
-			
-			}
-		catch(Exception e){
+		}
+        catch(Exception e)
+        {
 			e.printStackTrace();
 			return null;
 		}		
 	}
-    public static HashMap<String, Product> manufacturerRebates(){                                                          (){
+    public static HashMap<String, Product> manufacturerRebates()
+    {                                                          
 	    try{
 				getConnection();
 				HashMap<String, Product> products=new HashMap<String, Product>();
@@ -740,11 +741,10 @@ public class MySqlDataStoreUtilities {
 				conn.close();
 				return products;	
 			}
-		    catch(Exception e){
+		catch(Exception e){
 			    e.printStackTrace();
 			    return null;
-            }
-        }		
+        }	
     }
 
     public static HashMap<String, Product> getSales(){

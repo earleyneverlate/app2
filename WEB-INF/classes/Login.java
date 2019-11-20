@@ -74,7 +74,7 @@ public class Login extends HttpServlet {
 				+ "<div class='entry'>"
 				+ "<div style='width:400px; margin:25px; margin-left: auto;margin-right: auto;'>");
 		if (error)
-			pw.print("<h4 style='color:red'>Please check your username, password and user type!</h4>");
+			pw.print("<h4 style='color:red'>Please check your user name, password and user type!</h4>");
 		HttpSession session = request.getSession(true);
 		if(session.getAttribute("login_msg")!=null){			
 			pw.print("<h4 style='color:red'>"+session.getAttribute("login_msg")+"</h4>");
