@@ -96,11 +96,10 @@ public class Account extends HttpServlet {
 							pw.print("</tr>");
 							pw.print("<input type='hidden' name='orderId' value='"+oi.getOrderId()+"'>");
 						}
-					
 					}
-					pw.print("</table>");
-					pw.print("</form>");
 				}
+				pw.print("</table>");
+				pw.print("</form>");
 			}
 			else
 			{
