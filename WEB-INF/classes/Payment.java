@@ -26,7 +26,7 @@ public class Payment extends HttpServlet {
 		Utilities utility = new Utilities(request, pw);
 		if(!utility.isLoggedin())
 		{
-			HttpSession session = request.getSession(true);				
+			session = request.getSession(true);				
 			session.setAttribute("login_msg", "Please Login to Pay");
 			response.sendRedirect("Login");
 			return;
@@ -84,7 +84,7 @@ public class Payment extends HttpServlet {
 				for (OrderItem oi : utility.getCustomerOrders())
 				{
 					//set the parameter for each column and execute the prepared statement
-					utility.storePayment(orderId,oi.getName(),oi.getPrice(),userAddress,creditCardNo,CustomerName);
+					utility.storePayment(orderId,oi.getName(),oi.getPrice(),userAddress,creditCardNo,customerName);
 				}
 
 				//remove the order details from cart after processing
