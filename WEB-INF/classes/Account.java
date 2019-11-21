@@ -77,6 +77,7 @@ public class Account extends HttpServlet {
 			if(size>0)
 			{	
 				pw.print("<form name ='ViewOrder' action='ViewOrder' method='get'>");
+				pw.print("<table  class='gridtable'>");
 				pw.print("<tr><td></td>");
 				pw.print("<td>Order ID:</td>");
 				pw.print("<td>User Name:</td>");
