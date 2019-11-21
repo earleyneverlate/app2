@@ -515,7 +515,7 @@ public class Utilities extends HttpServlet {
         return ar;
     }
 
-    public ArrayList<String> getWirelessPlansList() {
+    public ArrayList<String> getWirelessPlanList() {
         ArrayList<String> ar = new ArrayList<String>();
         for (Map.Entry<String, WirelessPlan> entry : getWirelessPlansMap().entrySet()) {
             ar.add(entry.getValue().getName());
