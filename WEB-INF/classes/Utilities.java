@@ -363,7 +363,7 @@ public class Utilities extends HttpServlet {
 		}	
 	}
      public String storeReview(String productname, String producttype,String productmaker,String reviewrating,String reviewdate,String reviewtext,String retailerpin,String price,String retailercity){
-	String message=MongoDBDataStoreUtilities.insertReview(productname,username(),producttype,productmaker,reviewrating,reviewdate,reviewtext,retailerpin,price,city);
+	String message=MongoDBDataStoreUtilities.insertReview(productname,username(),producttype,productmaker,reviewrating,reviewdate,reviewtext,retailerpin,price,retailercity);
 		if(!message.equals("Successful"))
 		{ 
             return "UnSuccessful";
@@ -391,7 +391,7 @@ public class Utilities extends HttpServlet {
 		}
 		ArrayList<Review> listReview = reviews.get(productname);		
         //review this later
-        Review review = new Review(productname,username(),producttype,productmaker,reviewrating,reviewdate,reviewtext,retailerpin,price,city, message, message, message, message, message, message);
+        Review review = new Review(productname,username(),producttype,productmaker,reviewrating,reviewdate,reviewtext,retailerpin,price,retailercity, message, message, message, message, message, message);
 		listReview.add(review);	
 			
 			// add Reviews into database
