@@ -61,16 +61,16 @@ public class CheckOut extends HttpServlet {
 			pw.print("</td></tr>");
 		}
 		pw.print("<tr><td>");
-        pw.print("Total Order Cost</td><td>"+orderTotal);
+        pw.print("Total Order Cost: "+orderTotal);
 		pw.print("<input type='hidden' name='orderTotal' value='"+orderTotal+"'>");
 		pw.print("</td></tr></table><table><tr></tr><tr></tr>");	
 		pw.print("<tr><td>");
-     	pw.print("Credit/accountNo</td>");
-		pw.print("<td><input type='text' name='creditCardNo'>");
+     	pw.print("Credit Card Number: ");
+		pw.print("<input type='text' name='creditCardNo'>");
 		pw.print("</td></tr>");
 		pw.print("<tr><td>");
-	    pw.print("Customer Address</td>");
-		pw.print("<td><input type='text' name='userAddress'>");
+	    pw.print("Customer Address: ");
+		pw.print("<input type='text' name='userAddress'>");
         pw.print("</td></tr>");
 		if(session.getAttribute("usertype").equals("retailer"))
 		{
