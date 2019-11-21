@@ -19,14 +19,14 @@ public class Payment extends HttpServlet {
 		
 		response.setContentType("text/html");
 		PrintWriter pw = response.getWriter();
-		String msg = "good";
-		String customerName= "";
-		HttpSession session = request.getSession(true);
+		//String msg = "good";
+		//String Customername= "";
+		//HttpSession session = request.getSession(true);
 
 		Utilities utility = new Utilities(request, pw);
 		if(!utility.isLoggedin())
 		{
-			session = request.getSession(true);				
+			HttpSession session = request.getSession(true);				
 			session.setAttribute("login_msg", "Please Login to Pay");
 			response.sendRedirect("Login");
 			return;
@@ -38,71 +38,35 @@ public class Payment extends HttpServlet {
 		String orderDate=request.getParameter("orderDate");
 		System.out.println("User address == " +userAddress);
 		System.out.println("creditCardNo == " + creditCardNo); 	
-
-		if(session.getAttribute("usertype").equals("retailer"))
+		if(!userAddress.isEmpty() && !creditCardNo.isEmpty())
 		{
-			customerName =request.getParameter("customername");
-			try{
-				HashMap<String,User> hm=new HashMap<String,User>();
-				hm=MySqlDataStoreUtilities.selectUser();
-				if(hm.containsKey(customerName)){
-					if(hm.get(customerName).getUsertype().equals("customer"))
-					{
-						msg ="good";
-					}
-					else 
-					{
-						msg ="bad";
-					}
-						
-				}
-				else 
-				{
-					msg ="bad";
-				}
-				
-			}
-			catch(Exception e)
-			{
-				e.printStackTrace();
-			}
-		}
+			int orderId=utility.getOrderPaymentSize()+1;
 
-		utility.printHtml("Header.html");
-		utility.printHtml("LeftNavigationBar.html");
-		pw.print("<div id='content'><div class='post'><h2 class='title meta'>");
-		pw.print("<a style='font-size: 24px;'>Order</a>");
-		pw.print("</h2><div class='entry'>");
-
-		String message=MySqlDataStoreUtilities.getConnection();
-		if(message.equals("Successfull"))
-		{
-			if (msg.equals("good"))
+			for (OrderItem oi : utility.getCustomerOrders())
 			{
-				int orderId=utility.getOrderPaymentSize()+1;
-				//iterate through each order
-				for (OrderItem oi : utility.getCustomerOrders())
-				{
-					//set the parameter for each column and execute the prepared statement
-					utility.storePayment(orderId,oi.getName(),oi.getPrice(),userAddress,creditCardNo,customerName);
-				}
-
-				//remove the order details from cart after processing
-				OrdersHashMap.orders.remove(utility.username());
-				pw.print("<h2>Your Order is stored.");
-				pw.print("<br>Your order number is " + (orderId) + ".</h2>");
+				utility.storePayment(orderId,oi.getName(),oi.getPrice(),userAddress,creditCardNo);
 			}
-			else 
-			{
-				pw.print("<h2>Customer does not exits.</h2>");
-			}		
+			
+			OrdersHashMap.orders.remove(utility.username());	
+			utility.printHtml("Header.html");
+			pw.print("<div id='content'><div class='post'><h2 class='title meta'>");
+			pw.print("<a style='font-size: 24px;'>Order</a>");
+			pw.print("</h2><div class='entry'>");
+			pw.print("<h2>Your order is stored.");
+			pw.print("<br>Your order number is "+ (orderId) + ".");
+			pw.print("</h2></div></div></div>");		
+			utility.printHtml("Footer.html");
 		}
 		else
 		{
-			pw.print("<h2>Error: The SQL server is not up and running.</h2>");
-		}
-		pw.print("</div></div></div>");		
-		utility.printHtml("Footer.html");
+			utility.printHtml("Header.html");
+			pw.print("<div id='content'><div class='post'><h2 class='title meta'>");
+			pw.print("<a style='font-size: 24px;'>Order</a>");
+			pw.print("</h2><div class='entry'>");
+			pw.print("<h4 style='color:red'>Enter valid address and credit card number.</h4>");
+			pw.print("</h2></div></div></div>");		
+			utility.printHtml("Footer.html");
+		}	
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
