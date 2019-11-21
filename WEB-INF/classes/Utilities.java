@@ -362,7 +362,8 @@ public class Utilities extends HttpServlet {
      public String storeReview(String productname,String producttype,String productmaker,String reviewrating,String reviewdate,String  reviewtext,String reatilerpin,String price,String city){
 	String message=MongoDBDataStoreUtilities.insertReview(productname,username(),producttype,productmaker,reviewrating,reviewdate,reviewtext,reatilerpin,price,city);
 		if(!message.equals("Successful"))
-		{ return "UnSuccessful";
+		{ 
+            return "UnSuccessful";
 		}
 		else
 		{
