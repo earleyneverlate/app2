@@ -218,7 +218,7 @@ public class ProductCrud extends HttpServlet {
 			  }
 			   else if (producttype.equals("wirelesses"))
 			  {
-				  HashMap<String, WirelessPlan> allwireless = MySqlDataStoreUtilities.getWireless();
+				  allwireless = MySqlDataStoreUtilities.getWireless();
 				  if(!allwireless.containsKey(productId)){
 					  msg = "Product not available.";
 				  }
