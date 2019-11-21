@@ -391,7 +391,7 @@ public class Utilities extends HttpServlet {
 		}
 		ArrayList<Review> listReview = reviews.get(productname);		
         //review this later
-        Review review = new Review(productname,username(),producttype,productmaker,reviewrating,reviewdate,reviewtext,reatilerpin,price,city, message, message, message, message, message, message);
+        Review review = new Review(productname,username(),producttype,productmaker,reviewrating,reviewdate,reviewtext,retailerpin,price,city, message, message, message, message, message, message);
 		listReview.add(review);	
 			
 			// add Reviews into database
