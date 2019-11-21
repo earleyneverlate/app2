@@ -93,10 +93,10 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 				{	
 					pw.print("<table  class='gridtable'>");
 					pw.print("<tr><td></td>");
-					pw.print("<td>OrderId:</td>");
-					pw.print("<td>UserName:</td>");
-					pw.print("<td>productOrdered:</td>");
-					pw.print("<td>productPrice:</td></tr>");
+					pw.print("<td>Order id:</td>");
+					pw.print("<td>Username:</td>");
+					pw.print("<td>Product ordered:</td>");
+					pw.print("<td>Product price:</td></tr>");
 					for (OrderPayment oi : orderPayments.get(orderId)) 
 					{
 						pw.print("<tr>");			
@@ -110,11 +110,11 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 				}
 				else
 				{
-					pw.print("<h4 style='color:red'>You have not placed any order with this order id</h4>");
+					pw.print("<h4 style='color:red'>You have not placed any order with this order id.</h4>");
 				}
 			}else
 			{
-				pw.print("<h4 style='color:red'>Please enter a valid order id</h4>");
+				pw.print("<h4 style='color:red'>Please enter a valid order id.</h4>");
 			}	
 		}
 		//if the user presses cancel order from order details shown then process to cancel the order
@@ -144,7 +144,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 							{
 								MySqlDataStoreUtilities.deleteOrder(orderId,orderName);
 								ListOrderPayment.add(oi);
-								pw.print("<h4 style='color:red'>Your Order is Cancelled</h4>");								
+								pw.print("<h4 style='color:red'>Your order is cancelled.</h4>");								
 							}
 					}
 				//remove all the orders from hashmap that exist in cancel list
@@ -155,7 +155,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 					}
 			}else
 			{
-				pw.print("<h4 style='color:red'>Please select any product</h4>");
+				pw.print("<h4 style='color:red'>Please select any product.</h4>");
 			}	
 		}
 		pw.print("</form></div></div></div>");		

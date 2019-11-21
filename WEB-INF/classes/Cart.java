@@ -62,14 +62,14 @@ public class Cart extends HttpServlet {
 			{
 				pw.print("<tr>");
 				pw.print("<td>"+i+".</td><td>"+oi.getName()+"</td><td>: "+oi.getPrice()+"</td>");
-				pw.print("<input type='hidden' name='orderName' value='"+oi.getName()+"'>");
-				pw.print("<input type='hidden' name='orderPrice' value='"+oi.getPrice()+"'>");
+				pw.print("<input type='hidden' name='Order Name:' value='"+oi.getName()+"'>");
+				pw.print("<input type='hidden' name='Order Price:' value='"+oi.getPrice()+"'>");
 				pw.print("</tr>");
 				total = total +oi.getPrice();
 				i++;
 			}
-			pw.print("<input type='hidden' name='orderTotal' value='"+total+"'>");	
-			pw.print("<tr><th></th><th>Total</th><th>"+total+"</th>");
+			pw.print("<input type='hidden' name='Order Total:' value='"+total+"'>");	
+			pw.print("<tr><th></th><th>Total:</th><th>"+total+"</th>");
 			pw.print("<tr><td></td><td></td><td><input type='submit' name='CheckOut' value='CheckOut' class='btnbuy' /></td>");
 			pw.print("</table></form>");
 			/* This code is calling Carousel.java code to implement carousel feature*/

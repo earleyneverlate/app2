@@ -49,7 +49,7 @@ public class Registration extends HttpServlet {
 				hm = MySqlDataStoreUtilities.selectUser();
 
 				if(hm.containsKey(username)){
-					error_msg = "Username already exist as " + usertype;
+					error_msg = "Username already exist as: " + usertype;
 				}
 				else {
 					User user = new User(username, password, usertype);
@@ -66,7 +66,7 @@ public class Registration extends HttpServlet {
 				}
 			}
 		else{
-			error_msg = "MySql server is not up and running";
+			error_msg = "Error: The SQL server is not up and running.";
 		}
 	}
 	displayRegistration(request, response, pw, true);

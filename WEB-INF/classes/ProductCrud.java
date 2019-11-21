@@ -56,7 +56,7 @@ public class ProductCrud extends HttpServlet {
 				  //check this to see if getTvs works 
 				  alltvs = MySqlDataStoreUtilities.getTvs();
 				  if(alltvs.containsKey(productId)){
-					  msg = "Product already available";		  
+					  msg = "Product already available.";		  
 				  }	  
 			  }
 			  else if(producttype.equals("sounds"))
@@ -64,7 +64,7 @@ public class ProductCrud extends HttpServlet {
 				  //check this to see if getSounds works
 				  allsounds = MySqlDataStoreUtilities.getSounds();
 				  if(allsounds.containsKey(productId)){
-					  msg = "Product already available";
+					  msg = "Product already available.";
 				  }
 			  }
 			  else if (producttype.equals("phones"))
@@ -72,7 +72,7 @@ public class ProductCrud extends HttpServlet {
 				  //check this to see if getPhones works
 				  allphones = MySqlDataStoreUtilities.getPhones();
 				  if(allphones.containsKey(productId)){
-					  msg = "Product already available";
+					  msg = "Product already available.";
 				  }
 			  }
 			  else if (producttype.equals("laptops"))
@@ -80,7 +80,7 @@ public class ProductCrud extends HttpServlet {
 				  //check this to see if getLaptops works
 				  alllaptops = MySqlDataStoreUtilities.getLaptops();
 				  if(alllaptops.containsKey(productId)){
-					  msg = "Product already available";
+					  msg = "Product already available.";
 				  }
 			  }
 			  else if (producttype.equals("voices"))
@@ -88,7 +88,7 @@ public class ProductCrud extends HttpServlet {
 				  //check this to see if getVoices works
 				  allvoices = MySqlDataStoreUtilities.getVoices();
 				  if(allvoices.containsKey(productId)){
-					  msg = "Product already available";
+					  msg = "Product already available.";
 				  }
 			  }
 			  else if (producttype.equals("fitnesses"))
@@ -96,7 +96,7 @@ public class ProductCrud extends HttpServlet {
 				  //check this to see if getFitnesses works
 				  allfitnesses = MySqlDataStoreUtilities.getFitnesses();
 				  if(allfitnesses.containsKey(productId)){
-					  msg = "Product already available";
+					  msg = "Product already available.";
 				  }
 			  }
 			  else if (producttype.equals("smarts"))
@@ -104,7 +104,7 @@ public class ProductCrud extends HttpServlet {
 				  //check this to see if getSmarts works
 				  allsmarts = MySqlDataStoreUtilities.getSmarts();
 				  if(allsmarts.containsKey(productId)){
-					  msg = "Product already available";
+					  msg = "Product already available.";
 				  }
 			  }
 			  else if (producttype.equals("headphones"))
@@ -112,7 +112,7 @@ public class ProductCrud extends HttpServlet {
 				  //check this to see if getHeadphones works
 				  allheadphones = MySqlDataStoreUtilities.getHeadphones();
 				  if(allheadphones.containsKey(productId)){
-					  msg = "Product already available";
+					  msg = "Product already available.";
 				  }
 			  }
 			  else if (producttype.equals("wirelesses"))
@@ -120,7 +120,7 @@ public class ProductCrud extends HttpServlet {
 				  //check this to see if getWireless works
 				  allwireless = MySqlDataStoreUtilities.getWireless();
 				  if(allwireless.containsKey(productId)){
-					  msg = "Product already available";
+					  msg = "Product already available.";
 				  }
 			  }
 			  else if (producttype.equals("accessories"))
@@ -133,15 +133,15 @@ public class ProductCrud extends HttpServlet {
 							{
 								allaccessories = MySqlDataStoreUtilities.getAccessories();
 								if(allaccessories.containsKey(productId)){
-									msg = "Product already available";
+									msg = "Product already available.";
 								}
 							}else{
-								msg = "The product related to accessories is not available";
+								msg = "The product related to accessories is not available.";
 							}
 						
 						
 						}else{
-							msg = "Please add the prodcut name";
+							msg = "Please add the prodcut name.";
 						}
 				  
 			  }	
@@ -153,9 +153,9 @@ public class ProductCrud extends HttpServlet {
 				  }
 				  catch(Exception e)
 				  { 
-					msg = "Product cannot be inserted";
+					msg = "Product cannot be inserted.";
 				  }
-				  msg = "Product has been successfully added";
+				  msg = "Product has been successfully added.";
 			  }					
 			}else if(action.equals("update"))
 			{
@@ -163,7 +163,7 @@ public class ProductCrud extends HttpServlet {
 			  if(producttype.equals("tvs")){
 				  alltvs = MySqlDataStoreUtilities.getTvs();
 				  if(!alltvs.containsKey(productId)){
-					  msg = "P roduct not available";
+					  msg = "P roduct not available.";
 				  }
 					  
 			  }
@@ -171,63 +171,63 @@ public class ProductCrud extends HttpServlet {
 			  {
 				  allsounds = MySqlDataStoreUtilities.getSounds();
 				  if(!allsounds.containsKey(productId)){
-					  msg = "Product not available";
+					  msg = "Product not available.";
 				  }
 			  }
 			  else if (producttype.equals("phones"))
 			  {
 				  allphones = MySqlDataStoreUtilities.getPhones();
 				  if(!allphones.containsKey(productId)){
-					  msg = "Product not available";
+					  msg = "Product not available.";
 				  }
 			  }
 			  else if (producttype.equals("laptops"))
 			  {
 				  alllaptops = MySqlDataStoreUtilities.getLaptops();
 				  if(!alllaptops.containsKey(productId)){
-					  msg = "Product not available";
+					  msg = "Product not available.";
 				  }
 			  }
 			  else if (producttype.equals("voices"))
 			  {
 				  allvoices = MySqlDataStoreUtilities.getVoices();
 				  if(!allvoices.containsKey(productId)){
-					  msg = "Product not available";
+					  msg = "Product not available.";
 				  }
 			  }
 			  else if (producttype.equals("fitnesses"))
 			  {
 				  allfitnesses = MySqlDataStoreUtilities.getFitnesses();
 				  if(!allfitnesses.containsKey(productId)){
-					  msg = "Product not available";
+					  msg = "Product not available.";
 				  }
 			  }
 			  else if (producttype.equals("smarts"))
 			  {
 				  allsmarts= MySqlDataStoreUtilities.getSmarts();
 				  if(!allsmarts.containsKey(productId)){
-					  msg = "Product not available";
+					  msg = "Product not available.";
 				  }
 			  }
 			  else if (producttype.equals("headphones"))
 			  {
 				  allheadphones = MySqlDataStoreUtilities.getHeadphones();
 				  if(!allheadphones.containsKey(productId)){
-					  msg = "Product not available";
+					  msg = "Product not available.";
 				  }
 			  }
 			   else if (producttype.equals("wirelesses"))
 			  {
 				  HashMap<String, WirelessPlan> allwirelesses = MySqlDataStoreUtilities.getWireless();
 				  if(!allwirelesses.containsKey(productId)){
-					  msg = "Product not available";
+					  msg = "Product not available.";
 				  }
 			  }
 			  else if (producttype.equals("accessories"))
 			  {
 				  allaccessories = MySqlDataStoreUtilities.getAccessories();
 				  if(!allaccessories.containsKey(productId)){
-					  msg = "Product not available";
+					  msg = "Product not available.";
 				}
 			  }	
 			  if (msg.equals("good"))
@@ -239,9 +239,9 @@ public class ProductCrud extends HttpServlet {
 				  }
 				  catch(Exception e)
 				  { 
-					msg = "Product cannot be updated";
+					msg = "Product cannot be updated.";
 				  }
-				  msg = "Product has been successfully updated";
+				  msg = "Product has been successfully updated.";
 			  } 
 			}else if(action.equals("delete"))
 			{
@@ -305,11 +305,11 @@ public class ProductCrud extends HttpServlet {
 					  }
 					  catch(Exception e)
 					  { 
-						msg = "Product cannot be deleted";
+						msg = "Product cannot be deleted.";
 					  }
-					   msg = "Product has been successfully deleted";
+					   msg = "Product has been successfully deleted.";
 				  }else{
-					  msg = "Product not available";
+					  msg = "Product not available.";
 				  }
 			}	
 				
