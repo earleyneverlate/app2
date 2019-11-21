@@ -366,6 +366,7 @@ public class Utilities extends HttpServlet {
 	String message=MongoDBDataStoreUtilities.insertReview(productname,username(),producttype,productmaker,reviewrating,reviewdate,reviewtext,retailerpin,price,retailercity);
 		if(!message.equals("Successful"))
 		{ 
+            System.out.println("unsuccessful connection to mongo");
             return "UnSuccessful";
 		}
 		else
@@ -373,6 +374,7 @@ public class Utilities extends HttpServlet {
 		HashMap<String, ArrayList<Review>> reviews= new HashMap<String, ArrayList<Review>>();
 		try
 		{
+            System.out.println("successful connection to mongo");
 			reviews=MongoDBDataStoreUtilities.selectReview();
 		}
 		catch(Exception e)
