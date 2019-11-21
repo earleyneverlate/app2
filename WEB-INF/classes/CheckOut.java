@@ -47,37 +47,37 @@ public class CheckOut extends HttpServlet {
         pw.print("<div id='content'><div class='post'><h2 class='title meta'>");
 		pw.print("<a style='font-size: 24px;'>Order</a>");
 		pw.print("</h2><div class='entry'>");
-		pw.print("<table  class='gridtable'><tr><td>Customer Name:</td><td>");
+		pw.print("<table  class='gridtable'><tr><td>Customer Name: ");
 		pw.print(userName);
 		pw.print("</td></tr>");
 		// for each order iterate and display the order name price
 		for (OrderItem oi : utility.getCustomerOrders()) 
 		{
-			pw.print("<tr><td> Product Purchased:</td><td>");
+			pw.print("<tr><td> Product Purchased: ");
 			pw.print(oi.getName()+"</td></tr><tr><td>");
-			pw.print("<input type='hidden' name='orderPrice' value='"+oi.getPrice()+"'>");
-			pw.print("<input type='hidden' name='orderName' value='"+oi.getName()+"'>");
-			pw.print("Product Price:</td><td>"+ oi.getPrice());
+			pw.print("<input type='hidden' name='orderPrice' value='" + oi.getPrice() + "'>");
+			pw.print("<input type='hidden' name='orderName' value='" + oi.getName() + "'>");
+			pw.print("Product Price: " + oi.getPrice());
 			pw.print("</td></tr>");
 		}
 		pw.print("<tr><td>");
-        pw.print("Total Order Cost: "+orderTotal);
-		pw.print("<input type='hidden' name='orderTotal' value='"+orderTotal+"'>");
+        pw.print("Total Order Cost: " + orderTotal);
+		pw.print("<input type='hidden' name='orderTotal' value='" + orderTotal + "'>");
 		pw.print("</td></tr></table><table><tr></tr><tr></tr>");	
 		pw.print("<tr><td>");
      	pw.print("Credit Card Number: ");
 		pw.print("<input type='text' name='creditCardNo'>");
 		pw.print("</td></tr>");
-		pw.print("<tr><td>");
+		//pw.print("<tr><td>");
 	    pw.print("Customer Address: ");
 		pw.print("<input type='text' name='userAddress'>");
-        pw.print("</td></tr>");
+        //pw.print("</td></tr>");
 		if(session.getAttribute("usertype").equals("retailer"))
 		{
-		pw.print("<tr><td>");
+		//pw.print("<tr><td>");
 	    pw.print("Customer Name</td>");
 		pw.print("<td><input type='text' name='customername'>");
-        pw.print("</td></tr>");
+        //pw.print("</td></tr>");
 		}
 		pw.print("<tr><td colspan='2'>");
 		pw.print("<input type='submit' name='submit' class='btnbuy'>");
