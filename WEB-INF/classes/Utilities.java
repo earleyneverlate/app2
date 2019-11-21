@@ -302,7 +302,7 @@ public class Utilities extends HttpServlet {
             OrderItem orderitem = new OrderItem(headphone.getName(), headphone.getPrice(), headphone.getImage(), headphone.getRetailer());
             orderItems.add(orderitem);
         }
-        if (type.equals("wirelesses")) {
+        if (type.equals("wireless")) {
             WirelessPlan wirelessPlan;
             try{
 			allwireless = MySqlDataStoreUtilities.getWireless();
