@@ -55,8 +55,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 
 		if(request.getParameter("Order")!=null && request.getParameter("Order").equals("ViewOrder"))
 		{
-			HttpSession session = request.getSession(true);;
-			if (request.getParameter("orderId") != null && !request.getParameter("orderId").isEmpty() )
+			if (request.getParameter("orderId") != null && request.getParameter("orderId") != "" )
 			{
 				int orderId=Integer.parseInt(request.getParameter("orderId"));
 				pw.print("<input type='hidden' name='orderId' value='"+orderId+"'>");
@@ -64,7 +63,6 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 				try
 				{
 					orderPayments=MySqlDataStoreUtilities.selectOrder();
-
 				}
 				catch(Exception e)
 				{
@@ -77,16 +75,13 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 
 				if(orderPayments.get(orderId)!=null)
 				{
-				for(OrderPayment od:orderPayments.get(orderId))
-				if (session.getAttribute("usertype").equals("retailer"))
-				{	
-					size= orderPayments.get(orderId).size();
-				}
-				else
-				{		
-				if(od.getUserName().equals(username))
-				size= orderPayments.get(orderId).size();
-				}
+					for(OrderPayment od:orderPayments.get(orderId))
+					{
+						if(od.getUserName().equals(username))
+						{
+							size = orderPayments.get(orderId).size();
+						}
+					}
 				}
 				// display the orders if there exist order with order id
 				if(size>0)
@@ -104,7 +99,6 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 						pw.print("<td>"+oi.getOrderId()+".</td><td>"+oi.getUserName()+"</td><td>"+oi.getOrderName()+"</td><td>Price: "+oi.getOrderPrice()+"</td>");
 						pw.print("<td><input type='submit' name='Order' value='CancelOrder' class='btnbuy'></td>");
 						pw.print("</tr>");
-						
 					}
 					pw.print("</table>");
 				}
@@ -120,18 +114,16 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		//if the user presses cancel order from order details shown then process to cancel the order
 		if(request.getParameter("Order")!=null && request.getParameter("Order").equals("CancelOrder"))
 		{
-			String orderName=request.getParameter("orderName");
 			if(request.getParameter("orderName") != null)
 			{
+				String orderName=request.getParameter("orderName");
 				int orderId=0;
 				orderId=Integer.parseInt(request.getParameter("orderId"));
 				ArrayList<OrderPayment> ListOrderPayment =new ArrayList<OrderPayment>();
 				//get the order from file
 				try
 				{
-		
 					orderPayments=MySqlDataStoreUtilities.selectOrder();
-
 				}	
 				catch(Exception e)
 				{
@@ -140,7 +132,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 				//get the exact order with same ordername and add it into cancel list to remove it later
 				for (OrderPayment oi : orderPayments.get(orderId)) 
 					{
-							if(oi.getOrderName().equals(orderName))
+							if(oi.getOrderName().equals(orderName) && oi.getUserName().equals(username))
 							{
 								MySqlDataStoreUtilities.deleteOrder(orderId,orderName);
 								ListOrderPayment.add(oi);
@@ -150,10 +142,11 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 				//remove all the orders from hashmap that exist in cancel list
 				orderPayments.get(orderId).removeAll(ListOrderPayment);
 				if(orderPayments.get(orderId).size()==0)
-					{
-							orderPayments.remove(orderId);
-					}
-			}else
+				{
+					orderPayments.remove(orderId);
+				}
+			}
+			else
 			{
 				pw.print("<h4 style='color:red'>Please select any product.</h4>");
 			}	
@@ -161,7 +154,6 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		pw.print("</form></div></div></div>");		
 		utility.printHtml("Footer.html");
 	}
-
 }
 
 
