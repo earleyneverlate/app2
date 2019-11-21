@@ -36,8 +36,10 @@ public class Payment extends HttpServlet {
 		String userAddress=request.getParameter("userAddress");
 		String creditCardNo=request.getParameter("creditCardNo");
 		String orderDate=request.getParameter("orderDate");
-		System.out.print("User address is: " +userAddress);
-		// System.out.print(creditCardNo); 	
+		System.out.println("User address == " +userAddress);
+		System.out.println("creditCardNo == " + creditCardNo); 	
+		System.out.println("orderDate=="+orderDate);
+		orderDate="11/11/2019";
 		if(!userAddress.isEmpty() && !creditCardNo.isEmpty()&& !orderDate.isEmpty() )
 		{
 			int orderId=utility.getOrderPaymentSize()+1;
