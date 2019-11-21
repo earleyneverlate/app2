@@ -23,7 +23,7 @@ public class Payment extends HttpServlet {
 		String Customername= "";
 		HttpSession session = request.getSession(true);
 
-		/*Utilities utility = new Utilities(request, pw);
+		Utilities utility = new Utilities(request, pw);
 		if(!utility.isLoggedin())
 		{
 			session = request.getSession(true);				
@@ -92,50 +92,6 @@ public class Payment extends HttpServlet {
 		}
 		pw.print("</div></div></div>");		
 		utility.printHtml("Footer.html");
-	}*/
-		Utilities utility = new Utilities(request, pw);
-		if(!utility.isLoggedin())
-		{
-			HttpSession session = request.getSession(true);				
-			session.setAttribute("login_msg", "Please login to pay.");
-			response.sendRedirect("Login");
-			return;
-		}
-		// get the payment details like credit card no address processed from cart servlet	
-
-		String userAddress=request.getParameter("userAddress");
-		String creditCardNo=request.getParameter("creditCardNo");
-		System.out.println("User address == " + userAddress);
-		System.out.println("Credit card number == " + creditCardNo); 	
-		if(!userAddress.isEmpty() && !creditCardNo.isEmpty())
-		{
-			int orderId=utility.getOrderPaymentSize()+1;
-
-			for (OrderItem oi : utility.getCustomerOrders())
-			{
-				utility.storePayment(orderId,oi.getName(),oi.getPrice(),userAddress,creditCardNo);
-			}
-			
-			OrdersHashMap.orders.remove(utility.username());	
-			utility.printHtml("Header.html");
-			pw.print("<div id='content'><div class='post'><h2 class='title meta'>");
-			pw.print("<a style='font-size: 24px;'>Order</a>");
-			pw.print("</h2><div class='entry'>");
-			pw.print("<h2>Your order is stored.");
-			pw.print("<br>Your order number is "+ (orderId) + ".");
-			pw.print("</h2></div></div></div>");		
-			utility.printHtml("Footer.html");
-		}
-		else
-		{
-			utility.printHtml("Header.html");
-			pw.print("<div id='content'><div class='post'><h2 class='title meta'>");
-			pw.print("<a style='font-size: 24px;'>Order</a>");
-			pw.print("</h2><div class='entry'>");
-			pw.print("<h4 style='color:red'>Enter valid address and credit card number.</h4>");
-			pw.print("</h2></div></div></div>");		
-			utility.printHtml("Footer.html");
-		}	
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
