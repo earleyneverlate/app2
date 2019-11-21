@@ -79,6 +79,7 @@ public class CheckOut extends HttpServlet {
 		pw.print("<td><input type='text' name='customername'>");
         pw.print("</td></tr>");
 		}
+		pw.print("<tr><td colspan='2'>");
 		pw.print("<input type='submit' name='submit' class='btnbuy'>");
         pw.print("</table></form>");
 		pw.print("</div></div></div>");		
