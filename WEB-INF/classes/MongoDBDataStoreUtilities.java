@@ -31,7 +31,7 @@ public static String insertReview(String productname,String username,String prod
 				append("productName", productname).
 				append("productType", producttype).
 				append("productMaker", productmaker).
-				append("reviewRating",Integer.parseInt(reviewrating)).
+				append("reviewRating", Integer.parseInt(reviewrating)).
 				append("reviewDate", reviewdate).
 				append("reviewText", reviewtext).
 				append("retailerpin", retailerpin).
