@@ -340,6 +340,7 @@ public class Utilities extends HttpServlet {
             ArrayList<OrderPayment> arr = new ArrayList<OrderPayment>();
             orderPayments.put(orderId, arr);
         }
+
         ArrayList<OrderPayment> listOrderPayment = orderPayments.get(orderId);
         OrderPayment orderpayment = new OrderPayment(orderId, username(), orderName, orderPrice, userAddress, creditCardNo);
         listOrderPayment.add(orderpayment);
@@ -350,17 +351,19 @@ public class Utilities extends HttpServlet {
 		{	if(session.getAttribute("usertype").equals("retailer"))
 			{
 				MySqlDataStoreUtilities.insertOrder(orderId,customer,orderName,orderPrice,userAddress,creditCardNo);
-			}else
-				
-				{MySqlDataStoreUtilities.insertOrder(orderId,username(),orderName,orderPrice,userAddress,creditCardNo);}
+            }
+            else
+			{
+                MySqlDataStoreUtilities.insertOrder(orderId,username(),orderName,orderPrice,userAddress,creditCardNo);
+            }
 		}
 		catch(Exception e)
 		{
 			System.out.println("inside exception file not written properly");
 		}	
 	}
-     public String storeReview(String productname,String producttype,String productmaker,String reviewrating,String reviewdate,String  reviewtext,String reatilerpin,String price,String city){
-	String message=MongoDBDataStoreUtilities.insertReview(productname,username(),producttype,productmaker,reviewrating,reviewdate,reviewtext,reatilerpin,price,city);
+     public String storeReview(String productname, String producttype,String productmaker,String reviewrating,String reviewdate,String reviewtext,String retailerpin,String price,String retailercity){
+	String message=MongoDBDataStoreUtilities.insertReview(productname,username(),producttype,productmaker,reviewrating,reviewdate,reviewtext,retailerpin,price,city);
 		if(!message.equals("Successful"))
 		{ 
             return "UnSuccessful";

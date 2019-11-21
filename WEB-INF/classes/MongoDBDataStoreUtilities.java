@@ -187,7 +187,8 @@ public static ArrayList<Review> selectReviewForChart() {
         ArrayList<Review> reviewList = new ArrayList<Review>();
         try {
 
-            getConnection();
+			getConnection();
+			System.out.println("connected to mongo");
             Map<String, Object> dbObjIdMap = new HashMap<String, Object>();
             dbObjIdMap.put("retailerpin", "$retailerpin");
             dbObjIdMap.put("productName", "$productName");
