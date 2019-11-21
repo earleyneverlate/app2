@@ -27,7 +27,7 @@ public class Payment extends HttpServlet {
 		if(!utility.isLoggedin())
 		{
 			HttpSession session = request.getSession(true);				
-			session.setAttribute("login_msg", "Please Login to Pay");
+			session.setAttribute("login_msg", "Please login to pay.");
 			response.sendRedirect("Login");
 			return;
 		}
@@ -35,7 +35,6 @@ public class Payment extends HttpServlet {
 
 		String userAddress=request.getParameter("userAddress");
 		String creditCardNo=request.getParameter("creditCardNo");
-		String orderDate=request.getParameter("orderDate");
 		System.out.println("User address == " + userAddress);
 		System.out.println("Credit card number == " + creditCardNo); 	
 		if(!userAddress.isEmpty() && !creditCardNo.isEmpty())

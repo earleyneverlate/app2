@@ -42,7 +42,7 @@ public class Cart extends HttpServlet {
 		Carousel carousel = new Carousel();
 		if(!utility.isLoggedin()){
 			HttpSession session = request.getSession(true);				
-			session.setAttribute("login_msg", "Please Login to add items to cart");
+			session.setAttribute("login_msg", "Please login to add items to cart.");
 			response.sendRedirect("Login");
 			return;
 		}
@@ -70,14 +70,14 @@ public class Cart extends HttpServlet {
 			}
 			pw.print("<input type='hidden' name='orderTotal' value='"+total+"'>");	
 			pw.print("<tr><th></th><th>Total</th><th>"+total+"</th>");
-			pw.print("<tr><td></td><td></td><td><input type='submit' name='CheckOut' value='CheckOut' class='btnbuy' /></td>");
+			pw.print("<tr><td></td><td></td><td><input type='submit' name='CheckOut' value='CheckOut' class='btnbuy'/></td>");
 			pw.print("</table></form>");
 			/* This code is calling Carousel.java code to implement carousel feature*/
 			pw.print(carousel.carouselfeature(utility));
 		}
 		else
 		{
-			pw.print("<h4 style='color:red'>Your Cart is empty</h4>");
+			pw.print("<h4 style='color:red'>Your cart is empty.</h4>");
 		}
 		pw.print("</div></div></div>");		
 		utility.printHtml("Footer.html");

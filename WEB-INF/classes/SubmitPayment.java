@@ -1,4 +1,4 @@
-/*import java.io.IOException;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
@@ -31,30 +31,23 @@ public class SubmitPayment extends HttpServlet {
 		String userAddress=request.getParameter("userAddress");
 		String creditCardNo=request.getParameter("creditCardNo");
 		int orderId=utility.getOrderPaymentSize()+1;
-		//iterate through each order
 
 		for (OrderItem oi : utility.getCustomerOrders())
 		{
-
 			//set the parameter for each column and execute the prepared statement
-
 			utility.storePayment(orderId,oi.getName(),oi.getPrice(),userAddress,creditCardNo);
-		
 		}
 
-		//remove the order details from cart after processing
-			
+		//remove the order details from cart after processing	
 		OrdersHashMap.orders.remove(utility.username());	
 		utility.printHtml("Header.html");
 		utility.printHtml("Sidebar.html");
 	    pw.print("<div id='content'><div class='post'><h2 class='title meta'>");
 		pw.print("<a style='font-size: 24px;'>Order</a>");
 		pw.print("</h2><div class='entry'>");
-        pw.print("<h2>Your Order");
-        pw.print("&nbsp&nbsp");  
-        pw.print("is stored ");
-        pw.print("<br>Your Order No is "+(orderId));
-		pw.print("</h2></div></div></div>");		
+        pw.print("<h2>Your order is stored.");
+        pw.print("<br>Your order number is "+(orderId));
+		pw.print(".</h2></div></div></div>");		
 		utility.printHtml("Footer.html");
 	}
 	
@@ -66,4 +59,4 @@ public class SubmitPayment extends HttpServlet {
 		
 		
 	}
-}*/
+}
