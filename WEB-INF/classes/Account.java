@@ -78,10 +78,10 @@ public class Account extends HttpServlet {
 				{	
 					
 					pw.print("<tr><td></td>");
-					pw.print("<td>OrderId:</td>");
-					pw.print("<td>UserName:</td>");
-					pw.print("<td>productOrdered:</td>");
-					pw.print("<td>productPrice:</td></tr>");
+					pw.print("<td>Order ID:</td>");
+					pw.print("<td>User Name:</td>");
+					pw.print("<td>Product Ordered:</td>");
+					pw.print("<td>Product Price:</td></tr>");
 					for(Map.Entry<Integer, ArrayList<OrderPayment>> entry : orderPayments.entrySet())
 					{
 						for(OrderPayment oi:entry.getValue())	
@@ -103,7 +103,7 @@ public class Account extends HttpServlet {
 				}
 				else
 				{
-					pw.print("<h4 style='color:red'>You have not placed any order with this order id</h4>");
+					pw.print("<h4 style='color:red'>You have not placed any order with this order id.</h4>");
 				}
 			
 				
