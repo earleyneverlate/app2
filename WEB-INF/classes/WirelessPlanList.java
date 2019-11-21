@@ -57,12 +57,12 @@ public class WirelessPlanList extends HttpServlet {
 		int i = 1; int size= hm.size();
 		for(Map.Entry<String, WirelessPlan> entry : hm.entrySet())
 		{
-			WirelessPlan wirelesses = entry.getValue();
+			WirelessPlan wireless = entry.getValue();
 			if(i%3==1) pw.print("<tr>");
 			pw.print("<td><div id='shop_item'>");
-			pw.print("<h3>"+ wirelesses.getName()+"</h3>");
-			pw.print("<strong>$"+ wirelesses.getPrice()+"</strong><ul>");
-			pw.print("<li id='item'><img src='images/wireless_plan_images/"+ wirelesses.getImage()+"' alt='' /></li>");
+			pw.print("<h3>"+ wireless.getName()+"</h3>");
+			pw.print("<strong>$"+ wireless.getPrice()+"</strong><ul>");
+			pw.print("<li id='item'><img src='images/wireless_plan_images/"+ wireless.getImage()+"' alt='' /></li>");
 			
 			pw.print("<li><form method='post' action='Cart'>" +
 					"<input type='hidden' name='name' value='"+entry.getKey()+"'>"+
