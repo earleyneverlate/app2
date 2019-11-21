@@ -23,7 +23,6 @@ public class Account extends HttpServlet {
 	}
 
 	/* Display Account Details of the Customer (Name and Usertype) */
-
 	protected void displayAccount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter pw = response.getWriter();
@@ -57,34 +56,33 @@ public class Account extends HttpServlet {
 			HashMap<Integer, ArrayList<OrderPayment>> orderPayments = new HashMap<Integer, ArrayList<OrderPayment>>();
 			String TOMCAT_HOME = System.getProperty("catalina.home");
 			try
-				{
-					FileInputStream fileInputStream = new FileInputStream(new File(TOMCAT_HOME+"/webapps/app/PaymentDetails.txt"));
-					ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);	      
-					orderPayments = (HashMap)objectInputStream.readObject();
-				}
+			{
+				FileInputStream fileInputStream = new FileInputStream(new File(TOMCAT_HOME+"/webapps/app/PaymentDetails.txt"));
+				ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);	      
+				orderPayments = (HashMap)objectInputStream.readObject();
+			}
 			catch(Exception e)
-				{
-			
-				}
+			{
+				e.printStackTrace();
+			}
 			int size=0;
 			for(Map.Entry<Integer, ArrayList<OrderPayment>> entry : orderPayments.entrySet())
-				{
-					for(OrderPayment od:entry.getValue())	
-					if(od.getUserName().equals(user.getName()))
-					size= size+1;
-				}
-				
+			{
+				for(OrderPayment od:entry.getValue())	
+				if(od.getUserName().equals(user.getName()))
+				size = size + 1;
+			}	
 			if(size>0)
-				{	
-					
-					pw.print("<tr><td></td>");
-					pw.print("<td>Order ID:</td>");
-					pw.print("<td>User Name:</td>");
-					pw.print("<td>Product Ordered:</td>");
-					pw.print("<td>Product Price:</td></tr>");
-					for(Map.Entry<Integer, ArrayList<OrderPayment>> entry : orderPayments.entrySet())
+			{	
+				pw.print("<tr><td></td>");
+				pw.print("<td>Order ID:</td>");
+				pw.print("<td>User Name:</td>");
+				pw.print("<td>Product Ordered:</td>");
+				pw.print("<td>Product Price:</td></tr>");
+				for(Map.Entry<Integer, ArrayList<OrderPayment>> entry : orderPayments.entrySet())
+				{
+					for(OrderPayment oi:entry.getValue())	
 					{
-						for(OrderPayment oi:entry.getValue())	
 						if(oi.getUserName().equals(user.getName())) 
 						{
 							pw.print("<form method='get' action='ViewOrder'>");
@@ -98,24 +96,21 @@ public class Account extends HttpServlet {
 						}
 					
 					}
-					
 					pw.print("</table>");
 				}
-				else
-				{
-					pw.print("<h4 style='color:red'>You have not placed any order with this order id.</h4>");
-				}
+			}
+			else
+			{
+				pw.print("<h4 style='color:red'>You have not placed any order with this order id.</h4>");
+			}
 			
-				
-				
-				
-				
 			pw.print("</table>");		
 			pw.print("</h2></div></div></div>");		
 			utility.printHtml("Footer.html");	        	
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 		}		
 	}
 }
