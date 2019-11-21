@@ -60,7 +60,7 @@ public class Payment extends HttpServlet {
 		pw.print("</h2><div class='entry'>");
 
 		String message=MySqlDataStoreUtilities.getConnection();
-		if(message.equals("Successfull"))
+		if(message.equals("Successful"))
 		{
 			if (msg.equals("good"))
 			{
