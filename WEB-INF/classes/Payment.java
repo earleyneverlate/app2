@@ -54,10 +54,8 @@ public class Payment extends HttpServlet {
 			pw.print("<div id='content'><div class='post'><h2 class='title meta'>");
 			pw.print("<a style='font-size: 24px;'>Order</a>");
 			pw.print("</h2><div class='entry'>");
-			pw.print("<h2>Your Order");
-			pw.print("&nbsp&nbsp");  
-			pw.print(" is stored ");
-			pw.print("<br>Your Order Number is: "+(orderId));
+			pw.print("<h2>Your order is stored.");
+			pw.print("<br>Your order number is: " + (orderId) + ".");
 			pw.print("</h2></div></div></div>");		
 			utility.printHtml("Footer.html");
 		}
