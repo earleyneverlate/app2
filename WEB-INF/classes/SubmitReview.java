@@ -23,7 +23,7 @@ public class SubmitReview extends HttpServlet {
 	        try
                 {
                 response.setContentType("text/html");
-		PrintWriter pw = response.getWriter();
+				PrintWriter pw = response.getWriter();
                 Utilities utility = new Utilities(request,pw);
 		if(!utility.isLoggedin()){
 			HttpSession session = request.getSession(true);				

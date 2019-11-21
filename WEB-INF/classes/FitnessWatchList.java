@@ -79,12 +79,12 @@ public class FitnessWatchList extends HttpServlet {
 		int i = 1; int size= hm.size();
 		for(Map.Entry<String, FitnessWatch> entry : hm.entrySet())
 		{
-			FitnessWatch fitnesses = entry.getValue();
+			FitnessWatch fitness = entry.getValue();
 			if(i%3==1) pw.print("<tr>");
 			pw.print("<td><div id='shop_item'>");
-			pw.print("<h3>"+fitnesses.getName()+"</h3>");
-			pw.print("<strong>$"+fitnesses.getPrice()+"</strong><ul>");
-			pw.print("<li id='item'><img src='images/fitness_watches_images/"+fitnesses.getImage()+"' alt='' /></li>");
+			pw.print("<h3>"+fitness.getName()+"</h3>");
+			pw.print("<strong>$"+fitness.getPrice()+"</strong><ul>");
+			pw.print("<li id='item'><img src='images/fitness_watches_images/"+fitness.getImage()+"' alt='' /></li>");
 			
 			pw.print("<li><form method='post' action='Cart'>" +
 					"<input type='hidden' name='name' value='"+entry.getKey()+"'>"+
