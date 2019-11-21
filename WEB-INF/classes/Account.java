@@ -54,12 +54,12 @@ public class Account extends HttpServlet {
 			pw.print("<td>" +user.getUsertype()+ "</td>");
 			pw.print("</tr>");
 			HashMap<Integer, ArrayList<OrderPayment>> orderPayments = new HashMap<Integer, ArrayList<OrderPayment>>();
-			String TOMCAT_HOME = System.getProperty("catalina.home");
+			//String TOMCAT_HOME = System.getProperty("catalina.home");
 			try
 			{
-				FileInputStream fileInputStream = new FileInputStream(new File(TOMCAT_HOME+"/webapps/app/PaymentDetails.txt"));
-				ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);	      
-				orderPayments = (HashMap)objectInputStream.readObject();
+				//FileInputStream fileInputStream = new FileInputStream(new File(TOMCAT_HOME+"/webapps/app/PaymentDetails.txt"));
+				//ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);	      
+				orderPayments = MySqlDataStoreUtilities.selectOrder();
 			}
 			catch(Exception e)
 			{
@@ -69,11 +69,14 @@ public class Account extends HttpServlet {
 			for(Map.Entry<Integer, ArrayList<OrderPayment>> entry : orderPayments.entrySet())
 			{
 				for(OrderPayment od:entry.getValue())	
-				if(od.getUserName().equals(user.getName()))
-				size = size + 1;
+				{
+					if(od.getUserName().equals(user.getName()))
+					size = size + 1;
+				}
 			}	
 			if(size>0)
 			{	
+				pw.print("<form name ='ViewOrder' action='ViewOrder' method='get'>");
 				pw.print("<tr><td></td>");
 				pw.print("<td>Order ID:</td>");
 				pw.print("<td>User Name:</td>");
@@ -85,18 +88,17 @@ public class Account extends HttpServlet {
 					{
 						if(oi.getUserName().equals(user.getName())) 
 						{
-							pw.print("<form method='get' action='ViewOrder'>");
 							pw.print("<tr>");			
 							pw.print("<td><input type='radio' name='orderName' value='"+oi.getOrderName()+"'></td>");			
 							pw.print("<td>"+oi.getOrderId()+".</td><td>"+oi.getUserName()+"</td><td>"+oi.getOrderName()+"</td><td>Price: "+oi.getOrderPrice()+"</td>");
-							pw.print("<td><input type='hidden' name='orderId' value='"+oi.getOrderId()+"'></td>");
 							pw.print("<td><input type='submit' name='Order' value='CancelOrder' class='btnbuy'></td>");
 							pw.print("</tr>");
-							pw.print("</form>");
+							pw.print("<input type='hidden' name='orderId' value='"+oi.getOrderId()+"'>");
 						}
 					
 					}
 					pw.print("</table>");
+					pw.print("</form>");
 				}
 			}
 			else
